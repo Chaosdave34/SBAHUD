@@ -1,0 +1,16 @@
+[
+  {
+    "modid": "${modid}",
+    "name": "Template Mod",
+    "description": "Forge 1.8.9 Template Mod",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "",
+    "updateUrl": "",
+    "authorList": [],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]

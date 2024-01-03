@@ -45,6 +45,5 @@ jobs:
           body: |
             Changelog:
             ${{ github.event.head_commit.message }}
-            with:
           token: ${{ secrets.ACCESS_TOKEN }}
         

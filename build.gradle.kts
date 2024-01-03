@@ -12,6 +12,7 @@ val mcVersion: String by project
 val version: String by project
 val mixinGroup = "$baseGroup.mixins"
 val modid: String by project
+val modName: String by project
 
 java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(8))
@@ -76,13 +77,33 @@ dependencies {
     modImplementation("gg.essential:elementa-$mcVersion-forge:619")
 }
 
+tasks.withType(JavaCompile::class) {
+    options.encoding = "UTF-8"
+}
+
+tasks.withType(Jar::class) {
+    archiveBaseName.set(modid)
+    manifest.attributes.run {
+        this["FMLCorePluginContainsFMLMod"] = "true"
+        this["ForceLoadAsMod"] = "true"
+        this["ModSide"] = "CLIENT"
+
+        // If you don't want mixins, remove these lines
+        this["TweakClass"] = "org.spongepowered.asm.launch.MixinTweaker"
+        this["MixinConfigs"] = "mixins.$modid.json"
+    }
+}
+
 tasks.processResources {
     inputs.property("version", project.version)
     inputs.property("mcversion", mcVersion)
     inputs.property("modid", modid)
+    inputs.property("modName", modName)
     inputs.property("mixinGroup", mixinGroup)
 
     filesMatching(listOf("mcmod.info", "mixins.$modid.json")) {
         expand(inputs.properties)
     }
+
+    rename("(.+_at.cfg)", "META-INF/$1")
 }

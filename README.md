@@ -1,1 +1,1 @@
-# SkyblockAddons HUD features
+# Skyblock HUD customization

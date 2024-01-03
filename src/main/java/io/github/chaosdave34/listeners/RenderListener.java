@@ -33,7 +33,7 @@ import static io.github.chaosdave34.utils.TextUtils.NUMBER_FORMAT;
 
 public class RenderListener {
 
-    private static final ResourceLocation BARS = new ResourceLocation("skyblockaddons", "barsV2.png");
+    private static final ResourceLocation BARS = new ResourceLocation("sbhud", "barsV2.png");
 
     private final SBHUD main = SBHUD.getInstance();
 

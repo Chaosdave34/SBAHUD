@@ -12,23 +12,23 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public class MixinGuiNewChat {
     @Redirect(method = "drawChat", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/FontRenderer;drawStringWithShadow(Ljava/lang/String;FFI)I"))
     public int redirectDrawStringWithShadow(FontRenderer instance, String text, float x, float y, int color) {
-        if (SBHUD.getInstance().getUtils().isOnSkyblock()) {
-            y += SBHUD.getInstance().getConfig().moveYPositionOfChat;
+        if (SBHUD.INSTANCE.getUtils().isOnSkyblock()) {
+            y += SBHUD.INSTANCE.config.moveYPositionOfChat;
         }
         return instance.drawStringWithShadow(text, x, y, color);
     }
 
     @Redirect(method = "drawChat", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiNewChat;drawRect(IIIII)V"))
     public void redirectDrawRect(int left, int top, int right, int bottom, int color) {
-        if (SBHUD.getInstance().getUtils().isOnSkyblock()) {
-            top += SBHUD.getInstance().getConfig().moveYPositionOfChat;
-            bottom += SBHUD.getInstance().getConfig().moveYPositionOfChat;
+        if (SBHUD.INSTANCE.getUtils().isOnSkyblock()) {
+            top += SBHUD.INSTANCE.config.moveYPositionOfChat;
+            bottom += SBHUD.INSTANCE.config.moveYPositionOfChat;
         }
         GuiNewChat.drawRect(left, top, right, bottom, color);
     }
 
     @ModifyVariable(method = "getChatComponent", at = @At(value = "STORE"), ordinal = 4)
     private int modifyY(int original) {
-        return SBHUD.getInstance().getUtils().isOnSkyblock() ? original + SBHUD.getInstance().getConfig().moveYPositionOfChat: original;
+        return SBHUD.INSTANCE.getUtils().isOnSkyblock() ? original + SBHUD.INSTANCE.config.moveYPositionOfChat: original;
     }
 }

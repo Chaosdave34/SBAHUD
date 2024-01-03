@@ -184,7 +184,7 @@ public class ComponentsGui extends WindowScreen {
                 }
             }
         } catch (FileNotFoundException e) {
-            SBHUD.getLOGGER().info("HUD config file does not exist. Creating now...");
+            SBHUD.logger.info("HUD config file does not exist. Creating now...");
             saveLocations();
         }
     }
@@ -201,7 +201,7 @@ public class ComponentsGui extends WindowScreen {
             gson.toJson(locations, fileWriter);
             fileWriter.close();
         } catch (IOException e) {
-            SBHUD.getLOGGER().error("Could not write to HUD config file.");
+            SBHUD.logger.error("Could not write to HUD config file.");
         }
     }
 

@@ -16,7 +16,7 @@ public class Config extends Vigilant {
             subcategory = "HUD Elements"
     )
     public void editHudLocation() {
-        GuiUtil.open(SBHUD.getInstance().getComponentsGui());
+        GuiUtil.open(SBHUD.INSTANCE.getComponentsGui());
     }
 
     @Property(

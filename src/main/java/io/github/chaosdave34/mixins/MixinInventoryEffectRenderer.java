@@ -10,6 +10,6 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 public class MixinInventoryEffectRenderer {
     @ModifyVariable(method = "updateActivePotionEffects", at = @At(value = "STORE"))
     public boolean hasVisibleEffect_updateActivePotionEffects(boolean hasVisibleEffect) {
-        return (!SBHUD.getInstance().getUtils().isOnSkyblock() || !SBHUD.getInstance().getConfig().hidePotionEffects) && hasVisibleEffect;
+        return (!SBHUD.INSTANCE.getUtils().isOnSkyblock() || !SBHUD.INSTANCE.config.hidePotionEffects) && hasVisibleEffect;
     }
 }

@@ -56,8 +56,8 @@ public class ActionBarParser {
     private static final Pattern HEALTH_PATTERN_S = Pattern.compile("(?<health>[0-9,.]+)/(?<maxHealth>[0-9,.]+)❤(?<wand>\\+(?<wandHeal>[0-9,.]+)[▆▅▄▃▂▁])?");
     private static final Pattern SALVATION_PATTERN_S = Pattern.compile("(§6)?(§a)?(§l)? {2}(T[1-3]+!?)");
 
-    private static final SBHUD main = SBHUD.getInstance();
-    private static final Logger logger = SBHUD.getLOGGER();
+    private static final SBHUD main = SBHUD.INSTANCE;
+    private static final Logger logger = SBHUD.logger;
     @Getter
     private String tickerText;
     @Getter
@@ -230,7 +230,7 @@ public class ActionBarParser {
         Matcher m = TRUE_DEFENSE_PATTERN_S.matcher(stripped);
         if (m.matches()) {
             trueDefence = parseFloat(m.group("trueDefense"));
-            if (main.getConfig().trueDefenceText || main.getConfig().hideTrueDefense) {
+            if (main.config.trueDefenceText || main.config.hideTrueDefense) {
                 return null;
             }
         }
@@ -262,12 +262,12 @@ public class ActionBarParser {
                     String remove = "§6" + stack;
                     if (stack.contains("§l")) {
                         stack = stack.substring(2);
-                        if (main.getConfig().armorAbilityStack) {
+                        if (main.config.armorAbilityStack) {
                             String realRemove = remove + "§r";
                             stringsToRemove.add(realRemove);
                         }
                     } else {
-                        if (main.getConfig().armorAbilityStack) stringsToRemove.add(remove);
+                        if (main.config.armorAbilityStack) stringsToRemove.add(remove);
                     }
                     stack = stack.substring(0, stack.length() - 1);
 
@@ -292,7 +292,7 @@ public class ActionBarParser {
     private String parseHealth(String healthSection) {
         // Normal:      §c1390/1390❤
         // With Wand:   §c1390/1390❤+§c30▅
-        final boolean separateDisplay = main.getConfig().healthBar || main.getConfig().healthText;
+        final boolean separateDisplay = main.config.healthBar || main.config.healthText;
         String returnString = healthSection;
         float newHealth;
         float maxHealth;
@@ -303,7 +303,7 @@ public class ActionBarParser {
             maxHealth = parseFloat(m.group("maxHealth"));
             if (m.group("wand") != null) {
                 // Jank way of doing this for now
-                if (main.getConfig().healingWandText) {
+                if (main.config.healingWandText) {
                     returnString = "";// "§c"+ m.group("wand");
                     healingWandText = m.group("wand");
                     stringsToRemove.add(healthSection);
@@ -345,7 +345,7 @@ public class ActionBarParser {
             }
             setAttribute(Attribute.OVERFLOW_MANA, overflowMana);
             main.getRenderListener().setPredictMana(false);
-            if (main.getConfig().manaBar || main.getConfig().manaText) {
+            if (main.config.manaBar || main.config.manaText) {
                 return null;
             }
         }
@@ -368,7 +368,7 @@ public class ActionBarParser {
         if (m.matches()) {
             float defense = parseFloat(m.group("defense"));
             setAttribute(Attribute.DEFENCE, defense);
-            if (main.getConfig().defenseText || main.getConfig().defensePercentage) {
+            if (main.config.defenseText || main.config.defensePercentage) {
                 return null;
             }
         }
@@ -393,7 +393,7 @@ public class ActionBarParser {
         // Scorpion uses Ⓞ with color code e for usable tickers, Ⓞ with color code 7 for unusable
         // Ornate uses ⓩ with color code e for usable charges, Ⓞ with color code 6 for unusable
         tickerText = tickerSection;
-        if (main.getConfig().tickerChargesText) {
+        if (main.config.tickerChargesText) {
             return null;
         } else {
             return tickerSection;
@@ -402,7 +402,7 @@ public class ActionBarParser {
 
     private String parseSalvation(String salvationSection) {
         salvationText = salvationSection.trim();
-        if (main.getConfig().salvationText) {
+        if (main.config.salvationText) {
             return null;
         } else {
             return salvationSection;
@@ -411,7 +411,7 @@ public class ActionBarParser {
 
     private String parseAligned(String alignedSection) {
         isAligned = true;
-        if (main.getConfig().alignmentText) {
+        if (main.config.alignmentText) {
             return null;
         } else {
             return alignedSection;

@@ -12,12 +12,12 @@ import static net.minecraftforge.common.MinecraftForge.EVENT_BUS;
 
 public class NetworkListener {
 
-    private static final Logger logger = SBHUD.getLOGGER();
+    private static final Logger logger = SBHUD.logger;
 
     private final SBHUD main;
 
     public NetworkListener() {
-        main = SBHUD.getInstance();
+        main = SBHUD.INSTANCE;
     }
 
     @SubscribeEvent

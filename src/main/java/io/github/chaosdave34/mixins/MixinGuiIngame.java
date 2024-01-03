@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public class MixinGuiIngame {
     @Redirect(method = "renderScoreboard", at=@At(value = "INVOKE", target = "Lnet/minecraft/client/gui/FontRenderer;drawString(Ljava/lang/String;III)I", ordinal = 1))
     public int hideScoreboardNumbers(FontRenderer instance, String text, int x, int y, int color){
-        if (SBHUD.getInstance().getUtils().isOnSkyblock() && SBHUD.getInstance().getConfig().hideScoreboardNumbers) {
+        if (SBHUD.INSTANCE.getUtils().isOnSkyblock() && SBHUD.INSTANCE.config.hideScoreboardNumbers) {
             return -1;
         }
 

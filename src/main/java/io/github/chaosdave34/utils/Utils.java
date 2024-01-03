@@ -24,8 +24,8 @@ import java.util.regex.Pattern;
 @Setter
 public class Utils {
 
-    private static final SBHUD main = SBHUD.getInstance();
-    private static final Logger logger = SBHUD.getLOGGER();
+    private static final SBHUD main = SBHUD.INSTANCE;
+    private static final Logger logger = SBHUD.logger;
 
     private static final Set<String> SKYBLOCK_IN_ALL_LANGUAGES = Sets.newHashSet("SKYBLOCK", "\u7A7A\u5C9B\u751F\u5B58", "\u7A7A\u5CF6\u751F\u5B58");
 

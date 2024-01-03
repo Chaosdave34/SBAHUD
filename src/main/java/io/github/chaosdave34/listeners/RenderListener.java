@@ -35,7 +35,7 @@ public class RenderListener {
 
     private static final ResourceLocation BARS = new ResourceLocation("sbhud", "barsV2.png");
 
-    private final SBHUD main = SBHUD.getInstance();
+    private final SBHUD main = SBHUD.INSTANCE;
 
     @Getter
     @Setter
@@ -51,7 +51,7 @@ public class RenderListener {
         Minecraft mc = Minecraft.getMinecraft();
         if (mc != null) {
             EntityPlayerSP p = mc.thePlayer;
-            if (p != null && main.getConfig().healthPrediction) { //Reverse calculate the player's health by using the player's vanilla hearts. Also calculate the health change for the gui item.
+            if (p != null && main.config.healthPrediction) { //Reverse calculate the player's health by using the player's vanilla hearts. Also calculate the health change for the gui item.
                 float newHealth = getAttribute(Attribute.HEALTH) > getAttribute(Attribute.MAX_HEALTH) ?
                         getAttribute(Attribute.HEALTH) : Math.round(getAttribute(Attribute.MAX_HEALTH) * ((p.getHealth()) / p.getMaxHealth()));
                 main.getUtils().getAttributes().get(Attribute.HEALTH).setValue(newHealth);
@@ -70,7 +70,7 @@ public class RenderListener {
      */
     private void renderOverlays() {
         ComponentsGui componentsGui = main.getComponentsGui();
-        Config config = main.getConfig();
+        Config config = main.config;
 
         String healthText = getHealthText();
         handleElement(componentsGui.healthText, componentsGui.healtTextState, healthText, config.healthText);
@@ -126,7 +126,7 @@ public class RenderListener {
 
             for (UIContainer container : new UIContainer[]{(UIContainer) main.getComponentsGui().healthBar, (UIContainer) main.getComponentsGui().manaBar}) {
                 //float scale = main.getConfigValues().getGuiScale(feature);
-                float scale = main.getConfig().dummyScale;
+                float scale = main.config.dummyScale;
                 GlStateManager.pushMatrix();
                 GlStateManager.scale(scale, scale, 1);
                 drawBar(container, scale, mc);
@@ -163,12 +163,12 @@ public class RenderListener {
         boolean hasAbsorption = false;
         if (container == main.getComponentsGui().manaBar) {
             fill = getAttribute(Attribute.MANA) / getAttribute(Attribute.MAX_MANA);
-            if (!main.getConfig().manaBar) {
+            if (!main.config.manaBar) {
                 return;
             }
         } else if (container == main.getComponentsGui().healthBar) {
             fill = getAttribute(Attribute.HEALTH) / getAttribute(Attribute.MAX_HEALTH);
-            if (!main.getConfig().healthBar) {
+            if (!main.config.healthBar) {
                 return;
             }
         }
@@ -178,8 +178,8 @@ public class RenderListener {
         // float scaleY = main.getConfigValues().getSizesY(feature);
         float x = container.getLeft() + ((container.getRight() - container.getLeft()) / 2);
         float y = container.getBottom() + ((container.getTop() - container.getBottom()) / 2);
-        float scaleX = main.getConfig().dummyScaleX;
-        float scaleY = main.getConfig().dummyScaleY;
+        float scaleX = main.config.dummyScaleX;
+        float scaleY = main.config.dummyScaleY;
 
         GlStateManager.scale(scaleX, scaleY, 1);
 
@@ -197,7 +197,7 @@ public class RenderListener {
             color = ColorCode.WHITE.getColor();
         }
 
-        if (container == main.getComponentsGui().healthBar && main.getConfig().changeBarColorForPotions) {
+        if (container == main.getComponentsGui().healthBar && main.config.changeBarColorForPotions) {
             if (mc.thePlayer.isPotionActive(19/* Poison */)) {
                 color = ColorCode.DARK_GREEN.getColor();
             } else if (mc.thePlayer.isPotionActive(20/* Wither */)) {
@@ -298,7 +298,7 @@ public class RenderListener {
                         if (line.contains(abilityName)) {
                             String symbol = armorAbilityStack.getSymbol();
                             int stack = armorAbilityStack.getCurrentValue();
-                            if (!main.getConfig().shortArmorAbilityStack) {
+                            if (!main.config.shortArmorAbilityStack) {
                                 builder.append(abilityName).append(" ");
                             }
                             builder.append(stack).append(" ").append(symbol);
@@ -338,10 +338,10 @@ public class RenderListener {
     public void onRenderRemoveBars(RenderGameOverlayEvent.Pre e) {
         if (e.type == RenderGameOverlayEvent.ElementType.ALL) {
             if (main.getUtils().isOnSkyblock()) {
-                GuiIngameForge.renderFood = !main.getConfig().hideFoodBar;
-                GuiIngameForge.renderArmor = !main.getConfig().hideArmorBar;
-                GuiIngameForge.renderHealth = !main.getConfig().hideHealthBar;
-                GuiIngameForge.renderHealthMount = !main.getConfig().hidePetHealthBar;
+                GuiIngameForge.renderFood = !main.config.hideFoodBar;
+                GuiIngameForge.renderArmor = !main.config.hideArmorBar;
+                GuiIngameForge.renderHealth = !main.config.hideHealthBar;
+                GuiIngameForge.renderHealthMount = !main.config.hidePetHealthBar;
             }
         }
     }

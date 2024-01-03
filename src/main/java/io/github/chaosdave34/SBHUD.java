@@ -16,41 +16,32 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.File;
-import java.util.HashSet;
-import java.util.Set;
 
-@Mod(modid = SBHUD.MODID, version = SBHUD.VERSION)
+@Mod(modid = SBHUD.MODID, name = SBHUD.MODID, version = SBHUD.VERSION)
 public class SBHUD {
-    public static final String MODID = "sbhud";
-    public static final String VERSION = "0.1.0";
-    public static final String MOD_NAME = "SBHUD";
+    public static final String MODID = "@MODID@";
+    public static final String MOD_NAME = "@MODNAME@";
+    public static final String VERSION = "@VERSION@";
 
-    @Getter private static SBHUD instance;
-    @Getter private static final Logger LOGGER = LogManager.getLogger();
+    @Mod.Instance(MODID)
+    public static SBHUD INSTANCE;
+    public static final Logger logger = LogManager.getLogger();
+    public static final Config config = Config.INSTANCE;
+
     @Getter private static File configDir;
 
-    @Getter private final Utils utils;
-    @Getter private final RenderListener renderListener;
-    @Getter private final PlayerListener playerListener;
+    @Getter private Utils utils;
+    @Getter private RenderListener renderListener;
+    @Getter private PlayerListener playerListener;
 
-    @Getter
-    private final Set<Integer> registeredFeatureIDs = new HashSet<>();
-
-    @Getter private final Config config;
     @Getter private ComponentsGui componentsGui;
 
-    public SBHUD() {
-        instance = this;
-
+    @EventHandler
+    public void init(FMLInitializationEvent event) {
         utils = new Utils();
         renderListener = new RenderListener();
         playerListener = new PlayerListener();
 
-        config = Config.INSTANCE;
-    }
-
-    @EventHandler
-    public void init(FMLInitializationEvent event) {
         MinecraftForge.EVENT_BUS.register(renderListener);
         MinecraftForge.EVENT_BUS.register(playerListener);
         MinecraftForge.EVENT_BUS.register(new NetworkListener());

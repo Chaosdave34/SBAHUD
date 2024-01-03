@@ -25,7 +25,7 @@ public class Config extends Vigilant {
             category = "Skyblock HUD",
             subcategory = "HUD Elements"
     )
-    public boolean healthText = true;
+    public boolean healthText = false;
 
     @Property(
             type = PropertyType.CHECKBOX,
@@ -34,7 +34,7 @@ public class Config extends Vigilant {
             category = "Skyblock HUD",
             subcategory = "HUD Elements"
     )
-    public boolean healthPrediction = true;
+    public boolean healthPrediction = false;
 
     @Property(
             type = PropertyType.CHECKBOX,
@@ -42,7 +42,7 @@ public class Config extends Vigilant {
             category = "Skyblock HUD",
             subcategory = "HUD Elements"
     )
-    public boolean effectiveHealthText = true;
+    public boolean effectiveHealthText = false;
 
     @Property(
             type=PropertyType.CHECKBOX,
@@ -50,7 +50,7 @@ public class Config extends Vigilant {
             category = "Skyblock HUD",
             subcategory = "HUD Elements"
     )
-    public boolean healingWandText= true;
+    public boolean healingWandText= false;
 
     @Property(
             type = PropertyType.CHECKBOX,
@@ -58,7 +58,7 @@ public class Config extends Vigilant {
             category = "Skyblock HUD",
             subcategory = "HUD Elements"
     )
-    public boolean manaText = true;
+    public boolean manaText = false;
 
     @Property(
             type = PropertyType.CHECKBOX,
@@ -66,7 +66,7 @@ public class Config extends Vigilant {
             category = "Skyblock HUD",
             subcategory = "HUD Elements"
     )
-    public boolean overflowManaText = true;
+    public boolean overflowManaText = false;
 
     @Property(
             type = PropertyType.CHECKBOX,
@@ -74,7 +74,7 @@ public class Config extends Vigilant {
             category = "Skyblock HUD",
             subcategory = "HUD Elements"
     )
-    public boolean defenseText = true;
+    public boolean defenseText = false;
 
     @Property(
             type = PropertyType.CHECKBOX,
@@ -82,7 +82,7 @@ public class Config extends Vigilant {
             category = "Skyblock HUD",
             subcategory = "HUD Elements"
     )
-    public boolean defensePercentage = true;
+    public boolean defensePercentage = false;
 
     @Property(
             type = PropertyType.CHECKBOX,
@@ -90,7 +90,7 @@ public class Config extends Vigilant {
             category = "Skyblock HUD",
             subcategory = "HUD Elements"
     )
-    public boolean speedPercentage = true;
+    public boolean speedPercentage = false;
 
     @Property(
             type = PropertyType.CHECKBOX,
@@ -98,7 +98,7 @@ public class Config extends Vigilant {
             category = "Skyblock HUD",
             subcategory = "HUD Elements"
     )
-    public boolean armorAbilityStack = true;
+    public boolean armorAbilityStack = false;
 
     @Property(
             type = PropertyType.CHECKBOX,
@@ -107,7 +107,7 @@ public class Config extends Vigilant {
             category = "Skyblock HUD",
             subcategory = "HUD Elements"
     )
-    public boolean shortArmorAbilityStack = true;
+    public boolean shortArmorAbilityStack = false;
 
     @Property(
             type = PropertyType.CHECKBOX,
@@ -115,7 +115,7 @@ public class Config extends Vigilant {
             category = "Skyblock HUD",
             subcategory = "HUD Elements"
     )
-    public boolean tickerChargesText = true;
+    public boolean tickerChargesText = false;
 
     @Property(
             type = PropertyType.CHECKBOX,
@@ -123,7 +123,7 @@ public class Config extends Vigilant {
             category = "Skyblock HUD",
             subcategory = "HUD Elements"
     )
-    public boolean alignmentText = true;
+    public boolean alignmentText = false;
 
     @Property(
             type = PropertyType.CHECKBOX,
@@ -131,7 +131,7 @@ public class Config extends Vigilant {
             category = "Skyblock HUD",
             subcategory = "HUD Elements"
     )
-    public boolean salvationText = true;
+    public boolean salvationText = false;
 
     @Property(
             type = PropertyType.CHECKBOX,
@@ -140,7 +140,7 @@ public class Config extends Vigilant {
             category = "Skyblock HUD",
             subcategory = "HUD Elements"
     )
-    public boolean trueDefenceText = true;
+    public boolean trueDefenceText = false;
 
     @Property(
             type = PropertyType.CHECKBOX,
@@ -148,7 +148,7 @@ public class Config extends Vigilant {
             category = "Skyblock HUD",
             subcategory = "HUD Elements"
     )
-    public boolean healthBar = true;
+    public boolean healthBar = false;
 
     @Property(
             type = PropertyType.CHECKBOX,
@@ -156,9 +156,9 @@ public class Config extends Vigilant {
             category = "Skyblock HUD",
             subcategory = "HUD Elements"
     )
-    public boolean manaBar = true;
+    public boolean manaBar = false;
 
-    public boolean changeBarColorForPotions = true;
+    public boolean changeBarColorForPotions = false;
 
     @Property(
             type = PropertyType.CHECKBOX,
@@ -167,7 +167,7 @@ public class Config extends Vigilant {
             category = "HUD",
             subcategory = "Hide HUD Elements"
     )
-    public boolean hideFoodBar = true;
+    public boolean hideFoodBar = false;
 
     @Property(
             type = PropertyType.CHECKBOX,
@@ -176,7 +176,7 @@ public class Config extends Vigilant {
             category = "HUD",
             subcategory = "Hide HUD Elements"
     )
-    public boolean hideArmorBar = true;
+    public boolean hideArmorBar = false;
 
     @Property(
             type = PropertyType.CHECKBOX,
@@ -185,7 +185,7 @@ public class Config extends Vigilant {
             category = "HUD",
             subcategory = "Hide HUD Elements"
     )
-    public boolean hideHealthBar = true;
+    public boolean hideHealthBar = false;
 
     @Property(
             type = PropertyType.CHECKBOX,
@@ -194,7 +194,7 @@ public class Config extends Vigilant {
             category = "HUD",
             subcategory = "Hide HUD Elements"
     )
-    public boolean hideAbsorptionHearts = true;
+    public boolean hideAbsorptionHearts = false;
 
     @Property(
             type = PropertyType.CHECKBOX,
@@ -203,7 +203,7 @@ public class Config extends Vigilant {
             category = "HUD",
             subcategory = "Hide HUD Elements"
     )
-    public boolean hidePetHealthBar = true;
+    public boolean hidePetHealthBar = false;
 
     @Property(
             type = PropertyType.CHECKBOX,
@@ -212,7 +212,7 @@ public class Config extends Vigilant {
             category = "Skyblock HUD",
             subcategory = "Hide HUD Elements"
     )
-    public boolean hideTrueDefense = true;
+    public boolean hideTrueDefense = false;
 
     @Property(
             type = PropertyType.NUMBER,
@@ -254,7 +254,7 @@ public class Config extends Vigilant {
             category = "HUD",
             subcategory = "Modify HUD Elements"
     )
-    public boolean disableJumpingHearts = true;
+    public boolean disableJumpingHearts = false;
 
     @Property(
             type = PropertyType.NUMBER,
@@ -274,7 +274,7 @@ public class Config extends Vigilant {
             category = "HUD",
             subcategory = "Hide HUD Elements"
     )
-    public boolean hidePotionEffects = true;
+    public boolean hidePotionEffects = false;
 
     @Property(
             type = PropertyType.CHECKBOX,
@@ -282,7 +282,7 @@ public class Config extends Vigilant {
             category = "HUD",
             subcategory = "Hide HUD Elements"
     )
-    public boolean hideScoreboardNumbers = true;
+    public boolean hideScoreboardNumbers = false;
 
     public float dummyScaleX = 1;
 

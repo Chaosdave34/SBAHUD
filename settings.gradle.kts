@@ -11,5 +11,5 @@ pluginManagement {
     }
 }
 
-rootProject.name = "Forge1.8.9Template"
+rootProject.name = "SBHUD"
 

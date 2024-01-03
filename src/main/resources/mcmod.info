@@ -1,13 +1,13 @@
 [
   {
     "modid": "${modid}",
-    "name": "Template Mod",
-    "description": "Forge 1.8.9 Template Mod",
+    "name": "SBHUD",
+    "description": "Skyblock HUD customization",
     "version": "${version}",
     "mcversion": "${mcversion}",
-    "url": "",
+    "url": "https://github.com/Chaosdave34/SBHUD",
     "updateUrl": "",
-    "authorList": [],
+    "authorList": ["Chaosdave34"],
     "credits": "",
     "logoFile": "",
     "screenshots": [],

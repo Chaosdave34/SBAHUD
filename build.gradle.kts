@@ -4,6 +4,7 @@ plugins {
     id("gg.essential.loom") version "0.10.0.+"
     id("dev.architectury.architectury-pack200") version "0.1.3"
     id("com.github.johnrengelman.shadow") version "8.1.1"
+    id("io.freefair.lombok") version "6.6.1"
 }
 
 val baseGroup: String by project
@@ -30,6 +31,7 @@ loom {
             property("mixin.debug", "true")
             property("asmhelper.verbose", "true")
             arg("--tweakClass", "org.spongepowered.asm.launch.MixinTweaker")
+            arg("--tweakClass", "gg.essential.loader.stage0.EssentialSetupTweaker")
         }
     }
 
@@ -51,6 +53,8 @@ repositories {
     mavenCentral()
     maven("https://repo.spongepowered.org/maven/")
     maven("https://pkgs.dev.azure.com/djtheredstoner/DevAuth/_packaging/public/maven/v1")
+
+    maven("https://repo.essential.gg/repository/maven-public")
 }
 
 dependencies {
@@ -64,6 +68,12 @@ dependencies {
     annotationProcessor("org.spongepowered:mixin:0.8.5:processor")
 
     modRuntimeOnly("me.djtheredstoner:DevAuth-forge-legacy:1.1.2")
+
+    modRuntimeOnly("gg.essential:loader-launchwrapper:1.2.2")
+
+    modImplementation("gg.essential:essential-$mcVersion-forge:15744+g24ea70f4b2")
+    modImplementation("gg.essential:vigilance-$mcVersion-forge:295")
+    modImplementation("gg.essential:elementa-$mcVersion-forge:619")
 }
 
 tasks.processResources {

@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="51b7768e-f5c9-4eed-b6c5-e3211e4bf064" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/chaosdave34/ComponentsGui.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/chaosdave34/Config.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/chaosdave34/IMoveableUIContainer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/chaosdave34/MoveableUIContainer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/chaosdave34/MoveableUIText.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/chaosdave34/commands/SBAHUDCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/chaosdave34/core/ArmorAbilityStack.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/chaosdave34/core/Attribute.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/chaosdave34/events/SkyblockJoinedEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/chaosdave34/events/SkyblockLeftEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/chaosdave34/listeners/NetworkListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/chaosdave34/listeners/PlayerListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/chaosdave34/listeners/RenderListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/chaosdave34/mixins/MixinGuiIngame.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/chaosdave34/mixins/MixinGuiIngameForge.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/chaosdave34/mixins/MixinGuiNewChat.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/chaosdave34/mixins/MixinInventoryEffectRenderer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/chaosdave34/utils/ActionBarParser.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/chaosdave34/utils/ColorCode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/chaosdave34/utils/ItemUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/chaosdave34/utils/ScoreboardManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/chaosdave34/utils/TextUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/chaosdave34/utils/Utils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/chaosdave34/utils/gson/GsonInitializable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/chaosdave34/utils/gson/GsonInitializableTypeAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/chaosdave34/utils/gson/PatternAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/skyblockaddons/barsV2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Minecraft_Client.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/Minecraft_Client.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Minecraft_Server.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/template/TemplateMod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/chaosdave34/SBAHUD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/template/mixins/MixinGuiMainMenu.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mcmod.info" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mcmod.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mixins.templatemod.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mixins.sbahud.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="SBAHUD" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="SBAHUD" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="package-info" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "Chaosdave34"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="ef59d28f-d8bc-4ef7-989b-c00365c63cd0" />
+        <option name="url" value="https://github.com/Chaosdave34/SBAHUD.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="2aEpnbaoEkwcDZHJRTV0kNqafXy" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Minecraft Client.executor": "Run",
+    "Gradle.Build SBAHUD.executor": "Run",
+    "Gradle.Download Sources.executor": "Run",
+    "Gradle.SBAHUD [genSources].executor": "Run",
+    "Gradle.SBAHUD [javadoc].executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/david/Dokumente/SBAHUD/src/main/resources/assets/skyblockaddons",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "copyright.filetypes.JAVA",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/assets/skyblockaddons" />
+      <recent name="$PROJECT_DIR$/src/main/resources/assets.skyblockaddons" />
+      <recent name="$PROJECT_DIR$/src/main/java/io/github/chaosdave34/utils" />
+      <recent name="$PROJECT_DIR$/src/main/java/io/github/chaosdave34/features" />
+      <recent name="$PROJECT_DIR$/src/main/java/io/github/chaosdave34" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/assets/skyblockaddons" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="io.github.chaosdave34.listeners" />
+      <recent name="io.github.chaosdave34.utils" />
+      <recent name="io.github.chaosdave34.asm.hooks" />
+      <recent name="io.github.chaosdave34.events" />
+      <recent name="io.github.chaosdave34.features" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Minecraft Client">
+    <configuration name="SBAHUD [genSources]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="genSources" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="SBAHUD [javadoc]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="javadoc" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="SBHUD" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="SBHUD" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.SBAHUD [genSources]" />
+        <item itemvalue="Gradle.SBAHUD [javadoc]" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-1.8.0_392-temurin-1.8.0_392-f644763e9732-65fb08d6" />
+        <option value="jdk-17.0.9-temurin-17.0.9-f644763e9732-9d029893" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="51b7768e-f5c9-4eed-b6c5-e3211e4bf064" name="Changes" comment="" />
+      <created>1703893761012</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1703893761012</updated>
+      <workItem from="1703893762056" duration="1566000" />
+      <workItem from="1703933157748" duration="53823000" />
+      <workItem from="1704134453214" duration="1000" />
+      <workItem from="1704143544238" duration="2000" />
+      <workItem from="1704200087557" duration="3000" />
+      <workItem from="1704206893240" duration="400000" />
+      <workItem from="1704207372923" duration="15375000" />
+      <workItem from="1704232058117" duration="16046000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

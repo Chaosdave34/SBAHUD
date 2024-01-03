@@ -10,7 +10,10 @@ jobs:
         run: |
           VERSION=$(grep -Po '^version=.*' gradle.properties | cut -d= -f2)
           VERSION=${VERSION#[[:space:]]}
+          SHOULD_RELEASE=$(grep -Po '^shouldRelease=.*' gradle.properties | cut -d= -f2)
+          SHOULD_RELEASE=${SHOULD_RELEASE#[[:space:]]}
           echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+          echo "shouldRelease=$SHOULD_RELEASE" >> $GITHUB_OUTPUT
         id: get_version
       - name: Get short commit sha
         id: short_sha
@@ -32,6 +35,7 @@ jobs:
       - name: Create release with files
         uses: softprops/action-gh-release@v1
         id: create_release
+        if: steps.get_version.outputs.shouldRelease == 'true'
         with:
           draft: false
           name: SBHUD ${{ steps.get_version.outputs.VERSION }}

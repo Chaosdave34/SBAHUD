@@ -2,6 +2,7 @@ package io.github.chaosdave34;
 
 import gg.essential.api.EssentialAPI;
 import io.github.chaosdave34.commands.SBHUDCommand;
+import io.github.chaosdave34.gui.ComponentsGui;
 import io.github.chaosdave34.listeners.NetworkListener;
 import io.github.chaosdave34.listeners.PlayerListener;
 import io.github.chaosdave34.listeners.RenderListener;

@@ -111,6 +111,14 @@ public class Config extends Vigilant {
 
     @Property(
             type = PropertyType.CHECKBOX,
+            name = "Hide Aurora Armor Ability Stack",
+            category = "Skyblock HUD",
+            subcategory = "HUD Elements"
+    )
+    public boolean hideAuroraArmorAbilityStack = false;
+
+    @Property(
+            type = PropertyType.CHECKBOX,
             name = "Ticker Charge",
             category = "Skyblock HUD",
             subcategory = "HUD Elements"
@@ -235,17 +243,6 @@ public class Config extends Vigilant {
             max = +100
     )
     public int moveYPositionOfActionbar = 0;
-
-    @Property(
-            type = PropertyType.NUMBER,
-            name = "Move Y-Position of Chat",
-            description = "Adjust the y-position at which the chat is displayed.",
-            category = "HUD",
-            subcategory = "Modify HUD Elements",
-            min = -100,
-            max = +100
-    )
-    public int moveYPositionOfChat = 0;
 
     @Property(
             type = PropertyType.CHECKBOX,

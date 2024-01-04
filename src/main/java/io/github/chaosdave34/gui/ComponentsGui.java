@@ -1,4 +1,4 @@
-package io.github.chaosdave34;
+package io.github.chaosdave34.gui;
 
 import com.google.gson.Gson;
 import gg.essential.elementa.ElementaVersion;
@@ -8,6 +8,7 @@ import gg.essential.elementa.constraints.CenterConstraint;
 import gg.essential.elementa.constraints.PixelConstraint;
 import gg.essential.elementa.state.BasicState;
 import gg.essential.elementa.state.State;
+import io.github.chaosdave34.SBHUD;
 import io.github.chaosdave34.utils.ColorCode;
 
 import java.awt.*;

@@ -1,4 +1,4 @@
-package io.github.chaosdave34;
+package io.github.chaosdave34.gui;
 
 import gg.essential.elementa.UIComponent;
 import gg.essential.elementa.constraints.PixelConstraint;

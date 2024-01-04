@@ -6,9 +6,9 @@ import gg.essential.elementa.UIComponent;
 import gg.essential.elementa.components.UIContainer;
 import gg.essential.elementa.state.State;
 import gg.essential.universal.UMatrixStack;
-import io.github.chaosdave34.ComponentsGui;
+import io.github.chaosdave34.gui.ComponentsGui;
 import io.github.chaosdave34.Config;
-import io.github.chaosdave34.MoveableUIText;
+import io.github.chaosdave34.gui.MoveableUIText;
 import io.github.chaosdave34.SBHUD;
 import io.github.chaosdave34.core.ArmorAbilityStack;
 import io.github.chaosdave34.core.Attribute;
@@ -51,7 +51,7 @@ public class RenderListener {
         Minecraft mc = Minecraft.getMinecraft();
         if (mc != null) {
             EntityPlayerSP p = mc.thePlayer;
-            if (p != null && main.config.healthPrediction) { //Reverse calculate the player's health by using the player's vanilla hearts. Also calculate the health change for the gui item.
+            if (p != null && SBHUD.config.healthPrediction) { //Reverse calculate the player's health by using the player's vanilla hearts. Also calculate the health change for the gui item.
                 float newHealth = getAttribute(Attribute.HEALTH) > getAttribute(Attribute.MAX_HEALTH) ?
                         getAttribute(Attribute.HEALTH) : Math.round(getAttribute(Attribute.MAX_HEALTH) * ((p.getHealth()) / p.getMaxHealth()));
                 main.getUtils().getAttributes().get(Attribute.HEALTH).setValue(newHealth);
@@ -70,7 +70,7 @@ public class RenderListener {
      */
     private void renderOverlays() {
         ComponentsGui componentsGui = main.getComponentsGui();
-        Config config = main.config;
+        Config config = SBHUD.config;
 
         String healthText = getHealthText();
         handleElement(componentsGui.healthText, componentsGui.healtTextState, healthText, config.healthText);
@@ -126,7 +126,7 @@ public class RenderListener {
 
             for (UIContainer container : new UIContainer[]{(UIContainer) main.getComponentsGui().healthBar, (UIContainer) main.getComponentsGui().manaBar}) {
                 //float scale = main.getConfigValues().getGuiScale(feature);
-                float scale = main.config.dummyScale;
+                float scale = SBHUD.config.dummyScale;
                 GlStateManager.pushMatrix();
                 GlStateManager.scale(scale, scale, 1);
                 drawBar(container, scale, mc);
@@ -163,23 +163,23 @@ public class RenderListener {
         boolean hasAbsorption = false;
         if (container == main.getComponentsGui().manaBar) {
             fill = getAttribute(Attribute.MANA) / getAttribute(Attribute.MAX_MANA);
-            if (!main.config.manaBar) {
+            if (!SBHUD.config.manaBar) {
                 return;
             }
         } else if (container == main.getComponentsGui().healthBar) {
             fill = getAttribute(Attribute.HEALTH) / getAttribute(Attribute.MAX_HEALTH);
-            if (!main.config.healthBar) {
+            if (!SBHUD.config.healthBar) {
                 return;
             }
         }
         if (fill > 1) fill = 1;
 
-        // float scaleX = main.getConfigValues().getSizesX(feature);
-        // float scaleY = main.getConfigValues().getSizesY(feature);
+//        float scaleX = main.getConfigValues().getSizesX(feature);
+//        float scaleY = main.getConfigValues().getSizesY(feature);
         float x = container.getLeft() + ((container.getRight() - container.getLeft()) / 2);
         float y = container.getBottom() + ((container.getTop() - container.getBottom()) / 2);
-        float scaleX = main.config.dummyScaleX;
-        float scaleY = main.config.dummyScaleY;
+        float scaleX = SBHUD.config.dummyScaleX;
+        float scaleY = SBHUD.config.dummyScaleY;
 
         GlStateManager.scale(scaleX, scaleY, 1);
 
@@ -197,7 +197,7 @@ public class RenderListener {
             color = ColorCode.WHITE.getColor();
         }
 
-        if (container == main.getComponentsGui().healthBar && main.config.changeBarColorForPotions) {
+        if (container == main.getComponentsGui().healthBar && SBHUD.config.changeBarColorForPotions) {
             if (mc.thePlayer.isPotionActive(19/* Poison */)) {
                 color = ColorCode.DARK_GREEN.getColor();
             } else if (mc.thePlayer.isPotionActive(20/* Wither */)) {
@@ -296,9 +296,12 @@ public class RenderListener {
                     if (line.contains("§6Tiered Bonus: ")) {
                         String abilityName = armorAbilityStack.getAbilityName();
                         if (line.contains(abilityName)) {
+                            if (SBHUD.config.hideAuroraArmorAbilityStack && abilityName.equals(ArmorAbilityStack.AURORA.getAbilityName())) {
+                                return null;
+                            }
                             String symbol = armorAbilityStack.getSymbol();
                             int stack = armorAbilityStack.getCurrentValue();
-                            if (!main.config.shortArmorAbilityStack) {
+                            if (!SBHUD.config.shortArmorAbilityStack) {
                                 builder.append(abilityName).append(" ");
                             }
                             builder.append(stack).append(" ").append(symbol);
@@ -338,10 +341,10 @@ public class RenderListener {
     public void onRenderRemoveBars(RenderGameOverlayEvent.Pre e) {
         if (e.type == RenderGameOverlayEvent.ElementType.ALL) {
             if (main.getUtils().isOnSkyblock()) {
-                GuiIngameForge.renderFood = !main.config.hideFoodBar;
-                GuiIngameForge.renderArmor = !main.config.hideArmorBar;
-                GuiIngameForge.renderHealth = !main.config.hideHealthBar;
-                GuiIngameForge.renderHealthMount = !main.config.hidePetHealthBar;
+                GuiIngameForge.renderFood = !SBHUD.config.hideFoodBar;
+                GuiIngameForge.renderArmor = !SBHUD.config.hideArmorBar;
+                GuiIngameForge.renderHealth = !SBHUD.config.hideHealthBar;
+                GuiIngameForge.renderHealthMount = !SBHUD.config.hidePetHealthBar;
             }
         }
     }

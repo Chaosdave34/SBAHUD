@@ -13,6 +13,6 @@ public class SBHUDCommand extends Command {
 
     @DefaultHandler
     public void handle() {
-        GuiUtil.open(SBHUD.INSTANCE.config.gui());
+        GuiUtil.open(SBHUD.config.gui());
     }
 }

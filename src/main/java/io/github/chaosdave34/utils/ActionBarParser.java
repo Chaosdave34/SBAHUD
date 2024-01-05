@@ -38,11 +38,11 @@ import java.util.regex.Pattern;
  * Soulflow:                   §b421/421✎ §3100ʬ
  * Tethered + Alignment:      §a1039§a❈ Defense§a |||§a§l  T3!
  * Five stages of healing wand:     §62151/1851❤+§c120▆
- *                                  §62151/1851❤+§c120▅
- *                                  §62151/1851❤+§c120▄
- *                                  §62151/1851❤+§c120▃
- *                                  §62151/1851❤+§c120▂
- *                                  §62151/1851❤+§c120▁
+ * §62151/1851❤+§c120▅
+ * §62151/1851❤+§c120▄
+ * §62151/1851❤+§c120▃
+ * §62151/1851❤+§c120▂
+ * §62151/1851❤+§c120▁
  * <p>
  * To add something new to parse, add an else-if case in {@link #parseActionBar(String)} to call a method that
  * parses information from that section.
@@ -54,19 +54,15 @@ public class ActionBarParser {
     private static final Pattern DEFENSE_PATTERN_S = Pattern.compile("(?<defense>[0-9,.]+)❈ Defense");
     private static final Pattern TRUE_DEFENSE_PATTERN_S = Pattern.compile("(?<trueDefense>[0-9,.]+)❂ True Defense");
     private static final Pattern HEALTH_PATTERN_S = Pattern.compile("(?<health>[0-9,.]+)/(?<maxHealth>[0-9,.]+)❤(?<wand>\\+(?<wandHeal>[0-9,.]+)[▆▅▄▃▂▁])?");
-    private static final Pattern SALVATION_PATTERN_S = Pattern.compile("(§6)?(§a)?(§l)? {2}(T[1-3]+!?)");
+    private static final Pattern SALVATION_PATTERN_S = Pattern.compile("(§6|§a§l) {2}(T[1-3]+!?)");
 
     private static final SBHUD main = SBHUD.INSTANCE;
     private static final Logger logger = SBHUD.logger;
-    @Getter
+
     private String tickerText;
-    @Getter
     private boolean isAligned;
-    @Getter
     private String salvationText;
-    @Getter
     private float trueDefence;
-    @Getter
     private String healingWandText;
 
     @Setter
@@ -76,14 +72,9 @@ public class ActionBarParser {
     @Setter
     private long lastHealthUpdate;
 
-
     private boolean healthLock;
 
-
     private final LinkedList<String> stringsToRemove = new LinkedList<>();
-
-    public ActionBarParser() {
-    }
 
     /**
      * Parses the stats out of an action bar message and returns a new action bar message without the parsed stats
@@ -92,14 +83,12 @@ public class ActionBarParser {
      * Only removes the stats from the new action bar when their separate display features are enabled.
      *
      * @param actionBar Formatted action bar message
-     * @return New action bar without parsed stats.
      */
-    public String parseActionBar(String actionBar) {
+    public void parseActionBar(String actionBar) {
         // First split the action bar into sections
         String[] splitMessage = actionBar.split(" {3,}");
         // This list holds the text of unused sections that aren't displayed anywhere else in SBA,
         // so they can keep being displayed in the action bar
-        List<String> unusedSections = new LinkedList<>();
         stringsToRemove.clear();
 
         // health and mana section methods determine if prediction can be disabled, so enable both at first
@@ -124,13 +113,13 @@ public class ActionBarParser {
                 messages = messages.subList(1, messages.size());
 
                 List<String> splits = Arrays.asList(msg.split("Defense"));
-                String defense = splits.get(0) +  "Defense";
+                String defense = splits.get(0) + "Defense";
                 newSplitMessages.add(defense);
 
                 msg = String.join("", splits.subList(1, splits.size()));
 
                 if (msg.contains("|||")) {
-                    splits =  Arrays.asList(msg.split("\\|\\|\\|"));
+                    splits = Arrays.asList(msg.split("\\|\\|\\|"));
 
                     newSplitMessages.add(splits.get(0) + "|||");
 
@@ -150,22 +139,13 @@ public class ActionBarParser {
 
         for (String section : splitMessage) {
             try {
-                String sectionReturn = parseSection(section);
-                if (sectionReturn != null) {
-                    // can either return a string to keep displaying in the action bar
-                    // or null to not display them anymore
-                    unusedSections.add(sectionReturn);
-                } else {
+                if (parseSection(section) == null) {
                     // Remove via callback
                     stringsToRemove.add(section);
                 }
-            } catch (Exception ex) {
-                unusedSections.add(section);
+            } catch (Exception ignored) {
             }
         }
-
-        // Finally, display all unused sections separated by 5 spaces again
-        return String.join(StringUtils.repeat(" ", 5), unusedSections);
     }
 
     /**
@@ -229,7 +209,7 @@ public class ActionBarParser {
         String stripped = TextUtils.stripColor(trueDefenceSection);
         Matcher m = TRUE_DEFENSE_PATTERN_S.matcher(stripped);
         if (m.matches()) {
-            trueDefence = parseFloat(m.group("trueDefense"));
+            trueDefence = TextUtils.parseFloat(m.group("trueDefense"));
             if (SBHUD.config.trueDefenceText || SBHUD.config.hideTrueDefense) {
                 return null;
             }
@@ -299,8 +279,8 @@ public class ActionBarParser {
         String stripped = TextUtils.stripColor(healthSection);
         Matcher m = HEALTH_PATTERN_S.matcher(stripped);
         if (separateDisplay && m.matches()) {
-            newHealth = parseFloat(m.group("health"));
-            maxHealth = parseFloat(m.group("maxHealth"));
+            newHealth = TextUtils.parseFloat(m.group("health"));
+            maxHealth = TextUtils.parseFloat(m.group("maxHealth"));
             if (m.group("wand") != null) {
                 // Jank way of doing this for now
                 if (SBHUD.config.healingWandText) {
@@ -337,11 +317,11 @@ public class ActionBarParser {
         // 421/421✎ -10ʬ
         Matcher m = MANA_PATTERN_S.matcher(TextUtils.stripColor(manaSection).trim());
         if (m.matches()) {
-            setAttribute(Attribute.MANA, parseFloat(m.group("num")));
-            setAttribute(Attribute.MAX_MANA, parseFloat(m.group("den")));
+            setAttribute(Attribute.MANA, TextUtils.parseFloat(m.group("num")));
+            setAttribute(Attribute.MAX_MANA, TextUtils.parseFloat(m.group("den")));
             float overflowMana = 0;
             if (m.group("overflow") != null) {
-                overflowMana = parseFloat(m.group("overflow"));
+                overflowMana = TextUtils.parseFloat(m.group("overflow"));
             }
             setAttribute(Attribute.OVERFLOW_MANA, overflowMana);
             main.getRenderListener().setPredictMana(false);
@@ -366,7 +346,7 @@ public class ActionBarParser {
         String stripped = TextUtils.stripColor(defenseSection);
         Matcher m = DEFENSE_PATTERN_S.matcher(stripped);
         if (m.matches()) {
-            float defense = parseFloat(m.group("defense"));
+            float defense = TextUtils.parseFloat(m.group("defense"));
             setAttribute(Attribute.DEFENCE, defense);
             if (SBHUD.config.defenseText || SBHUD.config.defensePercentage) {
                 return null;
@@ -374,8 +354,6 @@ public class ActionBarParser {
         }
         return defenseSection;
     }
-
-
 
     /**
      * Parses the ticker section and updates {@link #tickerText} accordingly.
@@ -415,20 +393,6 @@ public class ActionBarParser {
             return null;
         } else {
             return alignedSection;
-        }
-    }
-
-    /**
-     * Parses a float from a given string.
-     *
-     * @param string the string to parse
-     * @return the parsed float or `-1` if parsing was unsuccessful
-     */
-    private float parseFloat(String string) {
-        try {
-            return TextUtils.NUMBER_FORMAT.parse(string).floatValue();
-        } catch (ParseException e) {
-            return -1;
         }
     }
 

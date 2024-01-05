@@ -62,7 +62,7 @@ public class PlayerListener {
             // Type 2 means it's an action bar message.
             if (e.type == 2) {
                 // Parse using ActionBarParser and display the rest message instead
-                String restMessage = actionBarParser.parseActionBar(unformattedText);
+                actionBarParser.parseActionBar(unformattedText);
 
             } else {
                 if (main.getRenderListener().isPredictMana() && unformattedText.startsWith("Used ") && unformattedText.endsWith("Mana)")) {

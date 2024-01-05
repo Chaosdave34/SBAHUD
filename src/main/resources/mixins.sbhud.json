@@ -8,6 +8,7 @@
   "client": [
     "MixinGuiIngame",
     "MixinGuiIngameForge",
+    "MixinGuiNewChat",
     "MixinInventoryEffectRenderer"
   ]
 }

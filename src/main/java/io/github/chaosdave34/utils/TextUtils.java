@@ -1,8 +1,11 @@
 package io.github.chaosdave34.utils;
 
+import lombok.val;
+
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Locale;
+import java.util.Map;
 import java.util.NavigableMap;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
@@ -19,13 +22,15 @@ public class TextUtils {
     private static final Pattern STRIP_COLOR_PATTERN = Pattern.compile("(?i)§[0-9A-FK-ORZ]");
     private static final Pattern NUMBERS_SLASHES = Pattern.compile("[^0-9 /]");
     private static final Pattern MAGNITUDE_PATTERN = Pattern.compile("(\\d[\\d,.]*\\d*)+([kKmMbBtT])");
-    private static final NavigableMap<Integer, String> suffixes = new TreeMap<>();
+    private static final NavigableMap<Long, String> suffixes = new TreeMap<>();
 
     static {
-        suffixes.put(1_000, "k");
-        suffixes.put(1_000_000, "M");
-        suffixes.put(1_000_000_000, "B");
-        NUMBER_FORMAT.setMaximumFractionDigits(2);
+        suffixes.put(1_000L, "k");
+        suffixes.put(1_000_000L, "M");
+        suffixes.put(1_000_000_000L, "B");
+        suffixes.put(1_000_000_000_000L, "T");
+        suffixes.put(1_000_000_000_000_000L, "P");
+        suffixes.put(1_000_000_000_000_000_000L, "E");
     }
 
     /**
@@ -96,7 +101,54 @@ public class TextUtils {
         return sb.toString();
     }
 
+    public static String abbreviate(long number) {
+        if (number == Long.MIN_VALUE) return abbreviate(Long.MIN_VALUE + 1);
+        if (number < 0) return "-" + abbreviate(-number);
 
+        if (number < 1000) return String.valueOf(number);
+
+        Map.Entry<Long, String> entry = suffixes.floorEntry(number);
+        Long divideBy = entry.getKey();
+        String suffix = entry.getValue();
+
+        long truncated = number / (divideBy / 10);
+
+        //noinspection IntegerDivisionInFloatingPointContext
+        boolean hasDecimal = truncated < 100 && truncated / 10.0 != truncated / 10;
+        return hasDecimal ? (truncated / 10.0) + suffix : (truncated / 10) + suffix;
+    }
+
+    public static double parseDouble(String string) {
+        try {
+            return TextUtils.NUMBER_FORMAT.parse(string).doubleValue();
+        } catch (ParseException e) {
+            return -1;
+        }
+    }
+
+    public static int parseInt(String string) {
+        try {
+            return TextUtils.NUMBER_FORMAT.parse(string).intValue();
+        } catch (ParseException e) {
+            return -1;
+        }
+    }
+
+    public static long parseLong(String string) {
+        try {
+            return TextUtils.NUMBER_FORMAT.parse(string).longValue();
+        } catch (ParseException e) {
+            return -1;
+        }
+    }
+
+    public static float parseFloat(String string) {
+        try {
+            return TextUtils.NUMBER_FORMAT.parse(string).floatValue();
+        } catch (ParseException e) {
+            return -1;
+        }
+    }
 
 
 

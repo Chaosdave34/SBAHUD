@@ -6,9 +6,10 @@ import gg.essential.vigilance.data.Property;
 import gg.essential.vigilance.data.PropertyType;
 
 import java.io.File;
+import java.time.format.DateTimeFormatter;
 
 public class Config extends Vigilant {
-
+    // Skyblock HUD
     @Property(
             type = PropertyType.BUTTON,
             name = "Edit HUD Location",
@@ -46,7 +47,7 @@ public class Config extends Vigilant {
 
     @Property(
             type=PropertyType.CHECKBOX,
-            name = "Healing Wang Text",
+            name = "Healing Wand Text",
             category = "Skyblock HUD",
             subcategory = "HUD Elements"
     )
@@ -168,6 +169,7 @@ public class Config extends Vigilant {
 
     public boolean changeBarColorForPotions = false;
 
+    // Hud
     @Property(
             type = PropertyType.CHECKBOX,
             name = "Hide Food Bar",
@@ -243,6 +245,17 @@ public class Config extends Vigilant {
             max = +100
     )
     public int moveYPositionOfActionbar = 0;
+
+    @Property(
+            type = PropertyType.NUMBER,
+            name = "Move Y-Position of Chat",
+            description = "Adjust the y-position at which the chat is displayed.",
+            category = "HUD",
+            subcategory = "Modify HUD Elements",
+            min = -100,
+            max = +100
+    )
+    public int moveYPositionOfChat = 0;
 
     @Property(
             type = PropertyType.CHECKBOX,

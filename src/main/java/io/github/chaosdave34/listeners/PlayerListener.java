@@ -4,7 +4,9 @@ package io.github.chaosdave34.listeners;
 import io.github.chaosdave34.SBHUD;
 import io.github.chaosdave34.core.Attribute;
 import io.github.chaosdave34.utils.ActionBarParser;
+import io.github.chaosdave34.utils.TabListParser;
 import io.github.chaosdave34.utils.ScoreboardManager;
+import io.github.chaosdave34.utils.SidebarParser;
 import lombok.Getter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -29,6 +31,11 @@ public class PlayerListener {
     private final SBHUD main = SBHUD.INSTANCE;
     @Getter
     private final ActionBarParser actionBarParser = new ActionBarParser();
+    @Getter
+    private final SidebarParser scoreboardParser = new SidebarParser();
+    @Getter
+    private final TabListParser tabListParser = new TabListParser();
+
 
     /**
      * Reset all the timers and stuff when joining a new world.
@@ -62,7 +69,7 @@ public class PlayerListener {
             // Type 2 means it's an action bar message.
             if (e.type == 2) {
                 // Parse using ActionBarParser and display the rest message instead
-                String restMessage = actionBarParser.parseActionBar(unformattedText);
+                actionBarParser.parseActionBar(unformattedText);
 
             } else {
                 if (main.getRenderListener().isPredictMana() && unformattedText.startsWith("Used ") && unformattedText.endsWith("Mana)")) {
@@ -126,7 +133,8 @@ public class PlayerListener {
                     EntityPlayerSP player = mc.thePlayer;
 
                     if (player != null) {
-                        main.getUtils().parseSidebar();
+                        scoreboardParser.parseSidebar();
+                        tabListParser.parseTabList();
                     }
                 } else if (timerTick > 20) { // To keep the timer going from 1 to 21 only.
                     timerTick = 1;

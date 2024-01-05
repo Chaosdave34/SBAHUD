@@ -6,7 +6,6 @@ import gg.essential.vigilance.data.Property;
 import gg.essential.vigilance.data.PropertyType;
 
 import java.io.File;
-import java.time.format.DateTimeFormatter;
 
 public class Config extends Vigilant {
     // Skyblock HUD
@@ -293,6 +292,46 @@ public class Config extends Vigilant {
             subcategory = "Hide HUD Elements"
     )
     public boolean hideScoreboardNumbers = false;
+
+    // Custom Sidebar
+    @Property(
+            type = PropertyType.CHECKBOX,
+            name = "Enable Custom Sidebar (BETA!)",
+            category = "Custom Sidebar"
+    )
+    public boolean enableCustomSidebar = false;
+
+    @Property(
+            type = PropertyType.SELECTOR,
+            name = "Date Format",
+            category = "Custom Sidebar",
+            options = {
+                    "MM/dd/yy",
+                    "dd.MM.yy"
+            }
+    )
+    public int dateFormat = 0;
+
+    @Property(
+            type = PropertyType.CHECKBOX,
+            name = "Replace Piggy with Purse",
+            category = "Custom Sidebar"
+    )
+    public boolean replacePiggyWithPurse;
+
+    @Property(
+            type = PropertyType.CHECKBOX,
+            name = "Show Bank",
+            category = "Custom Sidebar"
+    )
+    public boolean showBank;
+
+    @Property(
+            type = PropertyType.CHECKBOX,
+            name = "Show Gems",
+            category = "Custom Sidebar"
+    )
+    public boolean showGems;
 
     public float dummyScaleX = 1;
 

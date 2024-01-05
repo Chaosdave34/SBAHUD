@@ -27,7 +27,6 @@ public class Utils {
     private static final SBHUD main = SBHUD.INSTANCE;
     private static final Logger logger = SBHUD.logger;
 
-    private static final Set<String> SKYBLOCK_IN_ALL_LANGUAGES = Sets.newHashSet("SKYBLOCK", "\u7A7A\u5C9B\u751F\u5B58", "\u7A7A\u5CF6\u751F\u5B58");
 
     /**
      * Get a player's attributes. This includes health, mana, and defence.
@@ -65,43 +64,6 @@ public class Utils {
             return Pattern.compile(".*Hypixel BungeeCord.*").matcher(brand).matches();
         }
         return false;
-    }
-
-    public void parseSidebar() {
-        boolean foundScoreboard = false;
-        boolean foundSkyblockTitle = false;
-
-        // TODO: This can be optimized more.
-        if (isOnHypixel() && ScoreboardManager.hasScoreboard()) {
-            foundScoreboard = true;
-
-            // Check title for skyblock
-            String strippedScoreboardTitle = ScoreboardManager.getStrippedScoreboardTitle();
-            for (String skyblock : SKYBLOCK_IN_ALL_LANGUAGES) {
-                if (strippedScoreboardTitle.startsWith(skyblock)) {
-                    foundSkyblockTitle = true;
-                    break;
-                }
-            }
-
-            if (foundSkyblockTitle) {
-                if (!this.isOnSkyblock()) {
-                    MinecraftForge.EVENT_BUS.post(new SkyblockJoinedEvent());
-                }
-            }
-
-        }
-        // If it's not a Skyblock scoreboard, the player must have left Skyblock and
-        // be in some other Hypixel lobby or game.
-        if (!foundSkyblockTitle && this.isOnSkyblock()) {
-
-
-            // Check if we found a scoreboard in general. If not, its possible they are switching worlds.
-            // If we don't find a scoreboard for 10s, then we know they actually left the server.
-            if (foundScoreboard || System.currentTimeMillis() - ScoreboardManager.getLastFoundScoreboard() > 10000) {
-                MinecraftForge.EVENT_BUS.post(new SkyblockLeftEvent());
-            }
-        }
     }
 
     private boolean depthEnabled;

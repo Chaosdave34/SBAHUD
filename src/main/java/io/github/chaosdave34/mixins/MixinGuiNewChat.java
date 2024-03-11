@@ -20,7 +20,6 @@ public class MixinGuiNewChat {
     @SuppressWarnings("InvalidInjectorMethodSignature")
     @ModifyVariable(method = "getChatComponent", at = @At(value = "STORE", ordinal = 0), ordinal = 4)
     private int modifyY(int original) {
-        SBHUD.logger.info(original);
         return original + SBHUD.config.moveYPositionOfChat;
     }
 }

@@ -1,10 +1,14 @@
 package io.github.chaosdave34.gui;
 
+import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import gg.essential.elementa.ElementaVersion;
 import gg.essential.elementa.UIComponent;
 import gg.essential.elementa.WindowScreen;
+import gg.essential.elementa.components.UIBlock;
+import gg.essential.elementa.components.UIText;
 import gg.essential.elementa.constraints.CenterConstraint;
+import gg.essential.elementa.constraints.ColorConstraint;
 import gg.essential.elementa.constraints.PixelConstraint;
 import gg.essential.elementa.state.BasicState;
 import gg.essential.elementa.state.State;
@@ -18,6 +22,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ComponentsGui extends WindowScreen {
     private final Gson gson = new Gson();
@@ -25,12 +31,21 @@ public class ComponentsGui extends WindowScreen {
 
     public State<String> healtTextState = new BasicState<>("0");
 
-    public UIComponent healthText = new MoveableUIText("HEALTH_TEXT", "100/100")
+    public UIComponent healtTextBlock = new MoveableUIBlock("HEALTH_TEXT_BLOCK")
+            .setWidth(new PixelConstraint(50))
+            .setHeight(new PixelConstraint(10))
+            .setX(new CenterConstraint())
+            .setY(new CenterConstraint())
+            .setColor(new Color(0, 0, 0, 0))
+            .setChildOf(getWindow());
+
+
+    public UIComponent healthText = new UIText("HEALTH_TEXT")
             .bindText(healtTextState)
             .setColor(ColorCode.RED.getColorObject())
             .setX(new CenterConstraint())
             .setY(new CenterConstraint())
-            .setChildOf(getWindow());
+            .setChildOf(healtTextBlock);
 
     public State<String> effectiveHealtTextState = new BasicState<>("0");
 
@@ -52,12 +67,20 @@ public class ComponentsGui extends WindowScreen {
 
     public State<String> manaTextState = new BasicState<>("0");
 
-    public UIComponent manaText = new MoveableUIText("MANA_TEXT", "100/100")
+    public UIComponent manaTextBlock = new MoveableUIBlock("MANA_TEXT_BLOCK")
+            .setWidth(new PixelConstraint(50))
+            .setHeight(new PixelConstraint(10))
+            .setX(new CenterConstraint())
+            .setY(new PixelConstraint(120))
+            .setColor(new Color(0, 0, 0, 0))
+            .setChildOf(getWindow());
+
+    public UIComponent manaText = new UIText("MANA_TEXT")
             .bindText(manaTextState)
             .setColor(ColorCode.BLUE.getColorObject())
             .setX(new CenterConstraint())
-            .setY(new PixelConstraint(20))
-            .setChildOf(getWindow());
+            .setY(new CenterConstraint())
+            .setChildOf(manaTextBlock);
 
     public State<String> overflowManaTextState = new BasicState<>("0");
 
@@ -175,9 +198,11 @@ public class ComponentsGui extends WindowScreen {
 
     private void loadLocations() {
         try {
-            HashMap<String, ArrayList<Double>> locations = gson.fromJson(new FileReader(configPath), HashMap.class);
+            Map<String, List<Double>> locations = gson.fromJson(new FileReader(configPath), new TypeToken<Map<String, List<Double>>>() {
+            }.getType());
             if (locations != null) {
                 for (UIComponent component : components) {
+                    if (!(component instanceof IMoveableUIContainer)) return;
                     float x = locations.get(((IMoveableUIContainer) component).getName()).get(0).floatValue();
                     float y = locations.get(((IMoveableUIContainer) component).getName()).get(1).floatValue();
                     component.setX(new PixelConstraint(x));
@@ -194,7 +219,8 @@ public class ComponentsGui extends WindowScreen {
         HashMap<String, float[]> locations = new HashMap<>();
 
         for (UIComponent component : components) {
-            locations.put(((IMoveableUIContainer) component).getName(), new float[]{component.getLeft(), component.getTop()});
+            if (component instanceof IMoveableUIContainer)
+                locations.put(((IMoveableUIContainer) component).getName(), new float[]{component.getLeft(), component.getTop()});
         }
 
         try {

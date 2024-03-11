@@ -4,10 +4,13 @@ package io.github.chaosdave34.listeners;
 import gg.essential.api.utils.GuiUtil;
 import gg.essential.elementa.UIComponent;
 import gg.essential.elementa.components.UIContainer;
+import gg.essential.elementa.effects.Effect;
+import gg.essential.elementa.effects.OutlineEffect;
 import gg.essential.elementa.state.State;
 import gg.essential.universal.UMatrixStack;
 import io.github.chaosdave34.gui.ComponentsGui;
 import io.github.chaosdave34.Config;
+import io.github.chaosdave34.gui.MoveableUIBlock;
 import io.github.chaosdave34.gui.MoveableUIText;
 import io.github.chaosdave34.SBHUD;
 import io.github.chaosdave34.core.ArmorAbilityStack;
@@ -26,6 +29,7 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.client.GuiNotification;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import java.awt.*;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
@@ -70,6 +74,7 @@ public class RenderListener {
         Config config = SBHUD.config;
 
         String healthText = getHealthText();
+        healthText = TextUtils.fillFractionEqually(healthText);
         handleElement(componentsGui.healthText, componentsGui.healtTextState, healthText, config.healthText);
 
         String effectiveHealthText = NUMBER_FORMAT.format(Math.round(getAttribute(Attribute.HEALTH) * (1 + getAttribute(Attribute.DEFENCE) / 100F)));
@@ -78,7 +83,8 @@ public class RenderListener {
         String healingWandText = main.getPlayerListener().getHealingWandText();
         handleElement(componentsGui.healingWandTextText, componentsGui.healingWandTextState, healingWandText, config.healingWandText);
 
-        String manaText = NUMBER_FORMAT.format(getAttribute(Attribute.MANA)) + "/" + NUMBER_FORMAT.format(getAttribute(Attribute.MAX_MANA));
+        String manaText = NUMBER_FORMAT.format(Math.round(getAttribute(Attribute.MANA))) + "/" + NUMBER_FORMAT.format(getAttribute(Attribute.MAX_MANA));
+        manaText = TextUtils.fillFractionEqually(manaText);
         handleElement(componentsGui.manaText, componentsGui.manaTextState, manaText, config.manaText);
 
         String defenseText = NUMBER_FORMAT.format(getAttribute(Attribute.DEFENCE));
@@ -138,7 +144,13 @@ public class RenderListener {
             if (!main.getComponentsGui().getWindow().getChildren().contains(component)) {
                 component.unhide(true);
             }
-            state.set(value == null ? ((MoveableUIText) component).defaultText : value);
+            if (component instanceof MoveableUIText)
+                state.set(value == null ? ((MoveableUIText) component).defaultText : value);
+            else
+                state.set(value == null ? "100/100" : value);
+
+            if (component instanceof MoveableUIBlock)
+                component.enableEffect(new OutlineEffect(Color.GREEN, 1));
         } else {
             if (main.getComponentsGui().getWindow().getChildren().contains(component)) {
                 component.hide();

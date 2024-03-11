@@ -1,7 +1,5 @@
 package io.github.chaosdave34.utils;
 
-import lombok.val;
-
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Locale;
@@ -150,6 +148,21 @@ public class TextUtils {
         }
     }
 
+    public static String fillFractionEqually(String fraction) {
+        String[] splits = fraction.split("/");
+        if (splits.length != 2) return fraction;
+
+        int fraction1Length = splits[0].length();
+        int fraction2Length = splits[1].length();
+
+        StringBuilder newFraction = new StringBuilder();
+        for (int i = 0; i < fraction2Length - fraction1Length; i++)
+            newFraction.append(" ");
+
+        newFraction.append(splits[0]).append("/").append(splits[1]);
+
+        return newFraction.toString();
+    }
 
 
 }

@@ -162,18 +162,18 @@ public class ComponentsGui extends WindowScreen {
             .setX(new PixelConstraint(100))
             .setY(new CenterConstraint())
             .setHeight(new PixelConstraint(5))
-            .setWidth(new PixelConstraint(71))
+            .setWidth(new PixelConstraint(80))
             .setChildOf(getWindow());
 
     public UIComponent manaBar = new MoveableUIContainer("MANA_BAR")
             .setX(new PixelConstraint(200))
             .setY(new CenterConstraint())
             .setHeight(new PixelConstraint(5))
-            .setWidth(new PixelConstraint(71))
+            .setWidth(new PixelConstraint(80))
             .setChildOf(getWindow());
 
 
-    UIComponent[] components = new UIComponent[]{
+    public UIComponent[] components = new UIComponent[]{
             healthTextBlock,
             effectiveHealthText,
             manaTextBlock,

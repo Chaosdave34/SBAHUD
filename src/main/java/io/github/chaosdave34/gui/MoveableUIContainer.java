@@ -1,12 +1,17 @@
 package io.github.chaosdave34.gui;
 
 import gg.essential.elementa.components.UIContainer;
+import gg.essential.elementa.effects.Effect;
+import gg.essential.elementa.effects.OutlineEffect;
 import kotlin.Pair;
+
+import java.awt.*;
 
 public class MoveableUIContainer extends UIContainer implements IMoveableUIContainer{
     private final String name;
     private boolean isDragging;
     private Pair<Float, Float> dragOffset;
+    private Effect outlineEffect;
 
     public MoveableUIContainer(String name) {
         super();
@@ -39,5 +44,21 @@ public class MoveableUIContainer extends UIContainer implements IMoveableUIConta
     @Override
     public void setDragOffset(Pair<Float, Float> dragOffset) {
         this.dragOffset = dragOffset;
+    }
+
+    @Override
+    public void enableOutline() {
+        if (outlineEffect == null) {
+            outlineEffect = new OutlineEffect(Color.RED, 1, true, true);
+            enableEffect(outlineEffect);
+        }
+    }
+
+    @Override
+    public void disableOutline() {
+        if (outlineEffect != null) {
+            removeEffect(outlineEffect);
+            outlineEffect = null;
+        }
     }
 }

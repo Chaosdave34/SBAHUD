@@ -10,6 +10,7 @@ import gg.essential.elementa.state.State;
 import gg.essential.universal.UMatrixStack;
 import io.github.chaosdave34.gui.ComponentsGui;
 import io.github.chaosdave34.Config;
+import io.github.chaosdave34.gui.IMoveableUIContainer;
 import io.github.chaosdave34.gui.MoveableUIBlock;
 import io.github.chaosdave34.gui.MoveableUIText;
 import io.github.chaosdave34.SBHUD;
@@ -136,6 +137,15 @@ public class RenderListener {
                 GlStateManager.popMatrix();
             }
         }
+
+        for (UIComponent component : componentsGui.components) {
+            if (component instanceof IMoveableUIContainer) {
+                if (GuiUtil.getOpenedScreen() instanceof ComponentsGui)
+                    ((IMoveableUIContainer) component).enableOutline();
+                else
+                    ((IMoveableUIContainer) component).disableOutline();
+            }
+        }
     }
 
 
@@ -149,8 +159,6 @@ public class RenderListener {
             else
                 state.set(value == null ? "100/100" : value);
 
-            if (component instanceof MoveableUIBlock)
-                component.enableEffect(new OutlineEffect(Color.GREEN, 1));
         } else {
             if (main.getComponentsGui().getWindow().getChildren().contains(component)) {
                 component.hide();

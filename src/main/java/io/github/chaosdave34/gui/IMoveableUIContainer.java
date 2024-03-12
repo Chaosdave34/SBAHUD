@@ -2,12 +2,16 @@ package io.github.chaosdave34.gui;
 
 import gg.essential.elementa.UIComponent;
 import gg.essential.elementa.constraints.PixelConstraint;
+import gg.essential.elementa.effects.Effect;
+import gg.essential.elementa.effects.OutlineEffect;
 import gg.essential.elementa.events.UIClickEvent;
 import kotlin.Pair;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.functions.Function4;
+
+import java.awt.*;
 
 
 public interface IMoveableUIContainer {
@@ -61,4 +65,8 @@ public interface IMoveableUIContainer {
     Pair<Float, Float> getDragOffset();
 
     void setDragOffset(Pair<Float, Float> dragOffset);
+
+    void enableOutline();
+
+    void disableOutline();
 }

@@ -31,7 +31,7 @@ public class ComponentsGui extends WindowScreen {
 
     public State<String> healtTextState = new BasicState<>("0");
 
-    public UIComponent healtTextBlock = new MoveableUIBlock("HEALTH_TEXT_BLOCK")
+    public UIComponent healthTextBlock = new MoveableUIBlock("HEALTH_TEXT_BLOCK")
             .setWidth(new PixelConstraint(50))
             .setHeight(new PixelConstraint(10))
             .setX(new CenterConstraint())
@@ -45,7 +45,7 @@ public class ComponentsGui extends WindowScreen {
             .setColor(ColorCode.RED.getColorObject())
             .setX(new CenterConstraint())
             .setY(new CenterConstraint())
-            .setChildOf(healtTextBlock);
+            .setChildOf(healthTextBlock);
 
     public State<String> effectiveHealtTextState = new BasicState<>("0");
 
@@ -174,9 +174,9 @@ public class ComponentsGui extends WindowScreen {
 
 
     UIComponent[] components = new UIComponent[]{
-            healthText,
+            healthTextBlock,
             effectiveHealthText,
-            manaText,
+            manaTextBlock,
             overflowManaText,
             defenseText,
             defensePercentage,

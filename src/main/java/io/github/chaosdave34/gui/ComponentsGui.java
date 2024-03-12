@@ -202,7 +202,7 @@ public class ComponentsGui extends WindowScreen {
             }.getType());
             if (locations != null) {
                 for (UIComponent component : components) {
-                    if (!(component instanceof IMoveableUIContainer)) return;
+                    if (!(component instanceof IMoveableUIContainer)) continue;
                     float x = locations.get(((IMoveableUIContainer) component).getName()).get(0).floatValue();
                     float y = locations.get(((IMoveableUIContainer) component).getName()).get(1).floatValue();
                     component.setX(new PixelConstraint(x));

@@ -6,15 +6,13 @@ import gg.essential.vigilance.data.Property;
 import gg.essential.vigilance.data.PropertyType;
 
 import java.io.File;
-import java.time.format.DateTimeFormatter;
 
 public class Config extends Vigilant {
     // Skyblock HUD
     @Property(
             type = PropertyType.BUTTON,
             name = "Edit HUD Location",
-            category = "Skyblock HUD",
-            subcategory = "HUD Elements"
+            category = "Skyblock HUD"
     )
     public void editHudLocation() {
         GuiUtil.open(SBHUD.INSTANCE.getComponentsGui());
@@ -167,7 +165,37 @@ public class Config extends Vigilant {
     )
     public boolean manaBar = false;
 
+    @Property(
+            type = PropertyType.CHECKBOX,
+            name = "Change Bar Color for Potions",
+            category = "Skyblock HUD",
+            subcategory = "Bars"
+    )
     public boolean changeBarColorForPotions = false;
+
+    @Property(
+            type=PropertyType.DECIMAL_SLIDER,
+            name = "X Scale",
+            category = "Skyblock HUD",
+            subcategory = "Bars",
+            minF = 0.5f,
+            maxF = 2f,
+            decimalPlaces = 2
+    )
+    public float barScaleX = 1;
+
+    @Property(
+            type=PropertyType.DECIMAL_SLIDER,
+            name = "Y Scale",
+            category = "Skyblock HUD",
+            subcategory = "Bars",
+            minF = 0.5f,
+            maxF = 2f,
+            decimalPlaces = 2
+    )
+    public float barScaleY = 1;
+
+    public float dummyBarScale = 1;
 
     // Hud
     @Property(
@@ -293,12 +321,6 @@ public class Config extends Vigilant {
             subcategory = "Hide HUD Elements"
     )
     public boolean hideScoreboardNumbers = false;
-
-    public float dummyScaleX = 1;
-
-    public float dummyScaleY = 1;
-
-    public float dummyScale = 1;
 
     // Misc
     @Property(

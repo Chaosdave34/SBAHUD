@@ -300,6 +300,15 @@ public class Config extends Vigilant {
 
     public float dummyScale = 1;
 
+    // Misc
+    @Property(
+            type=PropertyType.CHECKBOX,
+            name = "Custom App Icon",
+            description = "Requires a restart.",
+            category = "Miscellaneous"
+    )
+    public boolean enableCustomAppIcon = false;
+
     public static Config INSTANCE = new Config();
 
     public Config() {

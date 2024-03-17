@@ -12,6 +12,8 @@ import java.util.List;
  * Utility methods for Skyblock Items
  */
 public class ItemUtils {
+    public static final int NBT_INTEGER = 3;
+    public static final int NBT_LONG = 4;
     public static final int NBT_STRING = 8;
     public static final int NBT_LIST = 9;
 
@@ -45,5 +47,16 @@ public class ItemUtils {
         } else {
             throw new NullPointerException("Cannot get lore from null item!");
         }
+    }
+
+    public static NBTTagCompound getExtraAttributes(ItemStack item) {
+        if (item == null) {
+            throw new NullPointerException("The item cannot be null!");
+        }
+        if (!item.hasTagCompound()) {
+            return null;
+        }
+
+        return item.getSubCompound("ExtraAttributes", false);
     }
 }

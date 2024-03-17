@@ -5,10 +5,8 @@ import com.google.gson.Gson;
 import gg.essential.elementa.ElementaVersion;
 import gg.essential.elementa.UIComponent;
 import gg.essential.elementa.WindowScreen;
-import gg.essential.elementa.components.UIBlock;
 import gg.essential.elementa.components.UIText;
 import gg.essential.elementa.constraints.CenterConstraint;
-import gg.essential.elementa.constraints.ColorConstraint;
 import gg.essential.elementa.constraints.PixelConstraint;
 import gg.essential.elementa.state.BasicState;
 import gg.essential.elementa.state.State;
@@ -20,14 +18,13 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class ComponentsGui extends WindowScreen {
     private final Gson gson = new Gson();
-    private String configPath = SBHUD.getConfigDir() + "/" + SBHUD.MODID + "_HUD.json";
+    private final String configPath = SBHUD.getConfigDir() + "/" + SBHUD.MODID + "_HUD.json";
 
     public State<String> healtTextState = new BasicState<>("0");
 
@@ -196,6 +193,7 @@ public class ComponentsGui extends WindowScreen {
     }
 
 
+    @SuppressWarnings("UnstableApiUsage")
     private void loadLocations() {
         try {
             Map<String, List<Double>> locations = gson.fromJson(new FileReader(configPath), new TypeToken<Map<String, List<Double>>>() {

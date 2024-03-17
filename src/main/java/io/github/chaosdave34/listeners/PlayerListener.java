@@ -1,21 +1,35 @@
 package io.github.chaosdave34.listeners;
 
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import io.github.chaosdave34.SBHUD;
 import io.github.chaosdave34.core.Attribute;
 import io.github.chaosdave34.utils.ActionBarParser;
+import io.github.chaosdave34.utils.ItemUtils;
 import io.github.chaosdave34.utils.ScoreboardManager;
+import io.github.chaosdave34.utils.TextUtils;
 import lombok.Getter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.Entity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.ChatComponentText;
 import net.minecraftforge.client.event.ClientChatReceivedEvent;
+import net.minecraftforge.client.event.sound.PlayBackgroundMusicEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.regex.Pattern;
 
@@ -168,4 +182,89 @@ public class PlayerListener {
     }
 
 
+    @SubscribeEvent
+    public void onRenderItem(ItemTooltipEvent e) {
+        ItemStack hoveredItem = e.itemStack;
+
+        if (!main.getUtils().isOnSkyblock()) return;
+
+        NBTTagCompound extraAttributes = ItemUtils.getExtraAttributes(hoveredItem);
+
+        if (extraAttributes == null) return;
+
+        int insertAt = e.toolTip.size();
+        if (e.showAdvancedItemTooltips) {
+            insertAt -= 2; // 1 line for the item name, and 1 line for the nbt
+            if (e.itemStack.isItemDamaged()) {
+                insertAt--; // 1 line for damage
+            }
+        }
+        insertAt = Math.max(0, insertAt);
+
+        String grayColorCode = "§8";
+
+        // general info
+        if (SBHUD.config.showItemID && extraAttributes.hasKey("id", ItemUtils.NBT_STRING))
+            e.toolTip.add(insertAt++, grayColorCode + "skyblock:" + extraAttributes.getString("id").toLowerCase());
+
+
+        if (SBHUD.config.showItemUUID && extraAttributes.hasKey("uuid", ItemUtils.NBT_STRING))
+            e.toolTip.add(insertAt++, grayColorCode + "uuid:" + extraAttributes.getString("uuid"));
+
+
+        if (SBHUD.config.showItemTimestamp && extraAttributes.hasKey("timestamp", ItemUtils.NBT_LONG)) {
+            long timestamp = extraAttributes.getLong("timestamp");
+
+            if (SBHUD.config.nicelyFormatTimestamp) {
+                String formattedDate = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm").format(new Timestamp(timestamp).toLocalDateTime());
+                e.toolTip.add(insertAt++, grayColorCode + "timestamp:" + formattedDate);
+            }
+            else
+                e.toolTip.add(insertAt++, grayColorCode + "timestamp:" + timestamp);
+        }
+
+        // misc
+        if (SBHUD.config.showOriginTag && extraAttributes.hasKey("originTag", ItemUtils.NBT_STRING))
+            e.toolTip.add(insertAt++, grayColorCode + "origin_tag:" + extraAttributes.getInteger("originTag"));
+
+
+        if (SBHUD.config.showNecromancerSouls && extraAttributes.hasKey("necromancer_souls", ItemUtils.NBT_LIST)) {
+            NBTTagList necromancerSouls = extraAttributes.getTagList("necromancer_souls", 10);
+
+            for (int i = 0; i < necromancerSouls.tagCount(); i++) {
+                NBTTagCompound soul = necromancerSouls.getCompoundTagAt(i);
+                e.toolTip.add(insertAt++, grayColorCode + "soul_" + (i + 1) + ":" + soul.getString("mob_id").toLowerCase());
+            }
+        }
+
+        // dungeon stats info
+        if (SBHUD.config.showItemTier && extraAttributes.hasKey("item_tier", ItemUtils.NBT_INTEGER))
+            e.toolTip.add(insertAt++, grayColorCode + "item_tier:" + extraAttributes.getInteger("item_tier"));
+
+
+        if (SBHUD.config.showBaseStatBoostPercentage && extraAttributes.hasKey("baseStatBoostPercentage", ItemUtils.NBT_INTEGER))
+            e.toolTip.add(insertAt++, grayColorCode + "base_stat_boost:" + extraAttributes.getInteger("baseStatBoostPercentage"));
+
+
+        // pets
+        if (extraAttributes.hasKey("petInfo", ItemUtils.NBT_STRING)) {
+            PetInfo petInfo = new Gson().fromJson(extraAttributes.getString("petInfo"), PetInfo.class);
+            if (SBHUD.config.showPetType)
+                e.toolTip.add(insertAt++, grayColorCode + "type:" + petInfo.type.toLowerCase());
+
+            if (SBHUD.config.showCandyUsed)
+                e.toolTip.add(insertAt++, grayColorCode + "candyUsed:" + petInfo.candyUsed);
+        }
+    }
+
+    public static class PetInfo {
+        @Getter
+        private String type;
+        private boolean active;
+        private double exp;
+        private String tier;
+        private boolean hideInfo;
+        private String heldItem;
+        private int candyUsed;
+    }
 }

@@ -331,6 +331,85 @@ public class Config extends Vigilant {
     )
     public boolean enableCustomAppIcon = false;
 
+    // Item Tooltips
+    @Property(
+            type=PropertyType.CHECKBOX,
+            name = "Show Item ID",
+            category = "Item Tooltips"
+    )
+    public boolean showItemID = false;
+
+    @Property(
+            type=PropertyType.CHECKBOX,
+            name = "Show Item UUID",
+            category = "Item Tooltips"
+    )
+    public boolean showItemUUID = false;
+
+    @Property(
+            type=PropertyType.CHECKBOX,
+            name = "Show Item Timestamp",
+            category = "Item Tooltips",
+            subcategory = "Timestamp"
+    )
+    public boolean showItemTimestamp = false;
+
+    @Property(
+            type=PropertyType.CHECKBOX,
+            name = "Nicely format Timestamp",
+            category = "Item Tooltips",
+            subcategory = "Timestamp"
+    )
+    public boolean nicelyFormatTimestamp = false;
+
+    @Property(
+            type=PropertyType.CHECKBOX,
+            name = "Show Origin Tag",
+            description = "kinda useless",
+            category = "Item Tooltips"
+    )
+    public boolean showOriginTag = false;
+
+    @Property(
+            type=PropertyType.CHECKBOX,
+            name = "Show Necromancer Souls",
+            category = "Item Tooltips"
+    )
+    public boolean showNecromancerSouls = false;
+
+    @Property(
+            type=PropertyType.CHECKBOX,
+            name = "Show Item Tier",
+            description = "Shows the dungeon floor this item was obtained.",
+            category = "Item Tooltips",
+            subcategory = "Dungeon Items"
+    )
+    public boolean showItemTier = false;
+
+    @Property(
+            type=PropertyType.CHECKBOX,
+            name = "Show Base Stat Boost Percentage",
+            category = "Item Tooltips",
+            subcategory = "Dungeon Items"
+    )
+    public boolean showBaseStatBoostPercentage = false;
+
+    @Property(
+            type=PropertyType.CHECKBOX,
+            name = "Show Type",
+            category = "Item Tooltips",
+            subcategory = "Pets"
+    )
+    public boolean showPetType = false;
+
+    @Property(
+            type=PropertyType.CHECKBOX,
+            name = "Show Candys Used",
+            category = "Item Tooltips",
+            subcategory = "Pets"
+    )
+    public boolean showCandyUsed = false;
+
     public static Config INSTANCE = new Config();
 
     public Config() {

@@ -3,6 +3,7 @@ package io.github.chaosdave34.mixins;
 import io.github.chaosdave34.SBHUD;
 import net.minecraft.client.gui.GuiNewChat;
 import net.minecraft.client.renderer.GlStateManager;
+import org.spongepowered.asm.mixin.Dynamic;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -17,7 +18,6 @@ public class MixinGuiNewChat {
         GlStateManager.translate(0, y, 0);
     }
 
-    @SuppressWarnings("InvalidInjectorMethodSignature")
     @ModifyVariable(method = "getChatComponent", at = @At(value = "STORE", ordinal = 0), ordinal = 4)
     private int modifyY(int original) {
         return original + SBHUD.config.moveYPositionOfChat;

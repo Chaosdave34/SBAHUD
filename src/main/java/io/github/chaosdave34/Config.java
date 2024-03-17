@@ -410,6 +410,30 @@ public class Config extends Vigilant {
     )
     public boolean showCandyUsed = false;
 
+    // bug fixes
+    @Property(
+            type=PropertyType.CHECKBOX,
+            name = "Fix Empty Sounds",
+            description = "Has no impact on gameplay,",
+            category = "Bug Fixes"
+    )
+    public boolean fixEmptySounds = false;
+
+    @Property(
+            type=PropertyType.CHECKBOX,
+            name = "Fix Empty Score Player Teams and Objectives",
+            description = "Has no impact on gameplay,",
+            category = "Bug Fixes"
+    )
+    public boolean fixEmptyScorePlayerTeamsAndObjectives = false;
+
+    @Property(
+            type=PropertyType.CHECKBOX,
+            name = "Fix Opening Links on Linux",
+            category = "Bug Fixes"
+    )
+    public boolean fixOpeningLinksOnLinux = false;
+
     public static Config INSTANCE = new Config();
 
     public Config() {

@@ -2,13 +2,11 @@ package io.github.chaosdave34.listeners;
 
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import io.github.chaosdave34.SBHUD;
 import io.github.chaosdave34.core.Attribute;
 import io.github.chaosdave34.utils.ActionBarParser;
 import io.github.chaosdave34.utils.ItemUtils;
 import io.github.chaosdave34.utils.ScoreboardManager;
-import io.github.chaosdave34.utils.TextUtils;
 import lombok.Getter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -18,7 +16,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.ChatComponentText;
 import net.minecraftforge.client.event.ClientChatReceivedEvent;
-import net.minecraftforge.client.event.sound.PlayBackgroundMusicEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
@@ -26,10 +23,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.time.Instant;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.regex.Pattern;
 
@@ -218,8 +212,7 @@ public class PlayerListener {
             if (SBHUD.config.nicelyFormatTimestamp) {
                 String formattedDate = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm").format(new Timestamp(timestamp).toLocalDateTime());
                 e.toolTip.add(insertAt++, grayColorCode + "timestamp:" + formattedDate);
-            }
-            else
+            } else
                 e.toolTip.add(insertAt++, grayColorCode + "timestamp:" + timestamp);
         }
 
@@ -257,8 +250,8 @@ public class PlayerListener {
         }
     }
 
+    @SuppressWarnings("unused")
     public static class PetInfo {
-        @Getter
         private String type;
         private boolean active;
         private double exp;

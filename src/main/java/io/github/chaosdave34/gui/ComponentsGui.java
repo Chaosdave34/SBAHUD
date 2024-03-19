@@ -32,7 +32,7 @@ public class ComponentsGui extends WindowScreen {
             .setWidth(new PixelConstraint(50))
             .setHeight(new PixelConstraint(10))
             .setX(new CenterConstraint())
-            .setY(new CenterConstraint())
+            .setY(new PixelConstraint(15))
             .setColor(new Color(0, 0, 0, 0))
             .setChildOf(getWindow());
 
@@ -50,7 +50,7 @@ public class ComponentsGui extends WindowScreen {
             .bindText(effectiveHealtTextState)
             .setColor(ColorCode.RED.getColorObject())
             .setX(new CenterConstraint())
-            .setY(new PixelConstraint(120))
+            .setY(new PixelConstraint(30))
             .setChildOf(getWindow());
 
     public State<String> healingWandTextState = new BasicState<>("0");
@@ -59,7 +59,7 @@ public class ComponentsGui extends WindowScreen {
             .bindText(healingWandTextState)
             .setColor(ColorCode.RED.getColorObject())
             .setX(new CenterConstraint())
-            .setY(new PixelConstraint(120))
+            .setY(new PixelConstraint(45))
             .setChildOf(getWindow());
 
     public State<String> manaTextState = new BasicState<>("0");
@@ -68,7 +68,7 @@ public class ComponentsGui extends WindowScreen {
             .setWidth(new PixelConstraint(50))
             .setHeight(new PixelConstraint(10))
             .setX(new CenterConstraint())
-            .setY(new PixelConstraint(120))
+            .setY(new PixelConstraint(60))
             .setColor(new Color(0, 0, 0, 0))
             .setChildOf(getWindow());
 
@@ -85,7 +85,7 @@ public class ComponentsGui extends WindowScreen {
             .bindText(overflowManaTextState)
             .setColor(ColorCode.DARK_AQUA.getColorObject())
             .setX(new CenterConstraint())
-            .setY(new PixelConstraint(40))
+            .setY(new PixelConstraint(75))
             .setChildOf(getWindow());
 
     public State<String> defenseTextState = new BasicState<>("0");
@@ -94,7 +94,7 @@ public class ComponentsGui extends WindowScreen {
             .bindText(defenseTextState)
             .setColor(ColorCode.GREEN.getColorObject())
             .setX(new CenterConstraint())
-            .setY(new PixelConstraint(60))
+            .setY(new PixelConstraint(90))
             .setChildOf(getWindow());
 
     public State<String> defensePercentageState = new BasicState<>("0");
@@ -103,7 +103,7 @@ public class ComponentsGui extends WindowScreen {
             .bindText(defensePercentageState)
             .setColor(ColorCode.GREEN.getColorObject())
             .setX(new CenterConstraint())
-            .setY(new PixelConstraint(80))
+            .setY(new PixelConstraint(105))
             .setChildOf(getWindow());
 
     public State<String> speedPercentageState = new BasicState<>("0%");
@@ -112,7 +112,7 @@ public class ComponentsGui extends WindowScreen {
             .bindText(speedPercentageState)
             .setColor(Color.WHITE)
             .setX(new CenterConstraint())
-            .setY(new PixelConstraint(100))
+            .setY(new PixelConstraint(120))
             .setChildOf(getWindow());
 
     public State<String> armorAbilityStackState = new BasicState<>("0%");
@@ -121,7 +121,7 @@ public class ComponentsGui extends WindowScreen {
             .bindText(armorAbilityStackState)
             .setColor(ColorCode.GOLD.getColorObject())
             .setX(new CenterConstraint())
-            .setY(new PixelConstraint(140))
+            .setY(new PixelConstraint(135))
             .setChildOf(getWindow());
 
     public State<String> tickerTextState = new BasicState<>("");
@@ -129,14 +129,14 @@ public class ComponentsGui extends WindowScreen {
     public UIComponent tickerText = new MoveableUIText("TICKER_TEXT", "§a§lⓄⓄⓄⓄⓄ")
             .bindText(tickerTextState)
             .setX(new CenterConstraint())
-            .setY(new PixelConstraint(160))
+            .setY(new PixelConstraint(150))
             .setChildOf(getWindow());
 
     public UIComponent alignmentText = new MoveableUIText("ALIGNMENT_TEXT", "|||")
             .setText("|||")
             .setColor(ColorCode.GREEN.getColorObject())
             .setX(new CenterConstraint())
-            .setY(new PixelConstraint(200))
+            .setY(new PixelConstraint(165))
             .setChildOf(getWindow());
 
     public State<String> salvationTextState = new BasicState<>("");
@@ -144,7 +144,7 @@ public class ComponentsGui extends WindowScreen {
     public UIComponent salvationText = new MoveableUIText("SALVATION_TEXT", "§a§lT3!")
             .bindText(salvationTextState)
             .setX(new CenterConstraint())
-            .setY(new PixelConstraint(160))
+            .setY(new PixelConstraint(180))
             .setChildOf(getWindow());
 
     public State<String> trueDefenceTextState = new BasicState<>("");
@@ -152,21 +152,40 @@ public class ComponentsGui extends WindowScreen {
     public UIComponent trueDefenceText = new MoveableUIText("TRUE_DEFENCE_TEXT", "100❂")
             .bindText(trueDefenceTextState)
             .setX(new CenterConstraint())
-            .setY(new PixelConstraint(220))
+            .setY(new PixelConstraint(195))
             .setChildOf(getWindow());
 
+    public State<String> magicFindTextState = new BasicState<>("");
+
+    public UIComponent magicFindText = new MoveableUIText("TRUE_DEFENCE_TEXT", "✯100")
+            .bindText(magicFindTextState)
+            .setColor(ColorCode.AQUA.getColorObject())
+            .setX(new CenterConstraint())
+            .setY(new PixelConstraint(210))
+            .setChildOf(getWindow());
+
+    public State<String> ferocityTextState = new BasicState<>("");
+
+    public UIComponent ferocityText = new MoveableUIText("TRUE_DEFENCE_TEXT", "⫽100")
+            .bindText(ferocityTextState)
+            .setColor(ColorCode.RED.getColorObject())
+            .setX(new CenterConstraint())
+            .setY(new PixelConstraint(225))
+            .setChildOf(getWindow());
+
+
     public UIComponent healthBar = new MoveableUIContainer("HEALTH_BAR")
-            .setX(new PixelConstraint(100))
+            .setX(new PixelConstraint(150))
             .setY(new CenterConstraint())
             .setHeight(new PixelConstraint(5))
             .setWidth(new PixelConstraint(80))
             .setChildOf(getWindow());
 
     public UIComponent manaBar = new MoveableUIContainer("MANA_BAR")
-            .setX(new PixelConstraint(200))
+            .setX(new PixelConstraint(300))
             .setY(new CenterConstraint())
             .setHeight(new PixelConstraint(5))
-            .setWidth(new PixelConstraint(80))
+            .setWidth(new PixelConstraint(100))
             .setChildOf(getWindow());
 
 
@@ -183,6 +202,8 @@ public class ComponentsGui extends WindowScreen {
             alignmentText,
             salvationText,
             trueDefenceText,
+            magicFindText,
+            ferocityText,
             healthBar,
             manaBar
     };

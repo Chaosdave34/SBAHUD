@@ -151,6 +151,24 @@ public class Config extends Vigilant {
 
     @Property(
             type = PropertyType.CHECKBOX,
+            name = "Magic Find",
+            description = "Only renders if magic find is shown in tablist.",
+            category = "Skyblock HUD",
+            subcategory = "HUD Elements"
+    )
+    public boolean magicFindText = false;
+
+    @Property(
+            type = PropertyType.CHECKBOX,
+            name = "Ferocity",
+            description = "Only renders if ferocity is shown in tablist.",
+            category = "Skyblock HUD",
+            subcategory = "HUD Elements"
+    )
+    public boolean ferocityText = false;
+
+    @Property(
+            type = PropertyType.CHECKBOX,
             name = "Health Bar",
             category = "Skyblock HUD",
             subcategory = "HUD Elements"

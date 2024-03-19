@@ -7,6 +7,7 @@ import io.github.chaosdave34.core.Attribute;
 import io.github.chaosdave34.utils.ActionBarParser;
 import io.github.chaosdave34.utils.ItemUtils;
 import io.github.chaosdave34.utils.ScoreboardManager;
+import io.github.chaosdave34.utils.TabListParser;
 import lombok.Getter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -37,6 +38,8 @@ public class PlayerListener {
     private final SBHUD main = SBHUD.INSTANCE;
     @Getter
     private final ActionBarParser actionBarParser = new ActionBarParser();
+    @Getter
+    private final TabListParser tabListParser = new TabListParser();
 
     /**
      * Reset all the timers and stuff when joining a new world.
@@ -134,6 +137,7 @@ public class PlayerListener {
                     EntityPlayerSP player = mc.thePlayer;
 
                     if (player != null) {
+                        tabListParser.parse();
                         main.getUtils().parseSidebar();
                     }
                 } else if (timerTick > 20) { // To keep the timer going from 1 to 21 only.
@@ -165,6 +169,14 @@ public class PlayerListener {
 
     public String getHealingWandText() {
         return actionBarParser.getHealingWandText();
+    }
+
+    public int getMagicFind() {
+        return tabListParser.getMagicFind();
+    }
+
+    public float getFerocity() {
+        return tabListParser.getFerocity();
     }
 
     private float getAttribute(Attribute attribute) {

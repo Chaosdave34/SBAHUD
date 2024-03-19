@@ -6,14 +6,17 @@ import gg.essential.elementa.UIComponent;
 import gg.essential.elementa.components.UIContainer;
 import gg.essential.elementa.state.State;
 import gg.essential.universal.UMatrixStack;
-import io.github.chaosdave34.gui.ComponentsGui;
 import io.github.chaosdave34.Config;
-import io.github.chaosdave34.gui.IMoveableUIContainer;
-import io.github.chaosdave34.gui.MoveableUIText;
 import io.github.chaosdave34.SBHUD;
 import io.github.chaosdave34.core.ArmorAbilityStack;
 import io.github.chaosdave34.core.Attribute;
-import io.github.chaosdave34.utils.*;
+import io.github.chaosdave34.gui.ComponentsGui;
+import io.github.chaosdave34.gui.IMoveableUIContainer;
+import io.github.chaosdave34.gui.MoveableUIText;
+import io.github.chaosdave34.utils.ColorCode;
+import io.github.chaosdave34.utils.DrawUtils;
+import io.github.chaosdave34.utils.ItemUtils;
+import io.github.chaosdave34.utils.TextUtils;
 import lombok.Getter;
 import lombok.Setter;
 import net.minecraft.client.Minecraft;
@@ -117,6 +120,12 @@ public class RenderListener {
         String trueDefenceText = main.getPlayerListener().getTrueDefence() == -1 ? null : NUMBER_FORMAT.format(main.getPlayerListener().getTrueDefence()) + "❂";
         handleElement(componentsGui.trueDefenceText, componentsGui.trueDefenceTextState, trueDefenceText, config.trueDefenceText);
 
+        String magicFindText = main.getPlayerListener().getMagicFind() == -1 ? null : "✯" + NUMBER_FORMAT.format(main.getPlayerListener().getMagicFind());
+        handleElement(componentsGui.magicFindText, componentsGui.magicFindTextState, magicFindText, config.magicFindText);
+
+        String ferocityText = main.getPlayerListener().getFerocity()== -1 ? null : "⫽" + NUMBER_FORMAT.format(main.getPlayerListener().getFerocity());
+        handleElement(componentsGui.ferocityText, componentsGui.ferocityTextState, ferocityText, config.ferocityText);
+
         main.getComponentsGui().getWindow().draw(UMatrixStack.UNIT);
 
         Minecraft mc = Minecraft.getMinecraft();
@@ -124,7 +133,6 @@ public class RenderListener {
             GlStateManager.disableBlend();
 
             for (UIContainer container : new UIContainer[]{(UIContainer) main.getComponentsGui().healthBar, (UIContainer) main.getComponentsGui().manaBar}) {
-                //float scale = main.getConfigValues().getGuiScale(feature);
                 float scale = SBHUD.config.dummyBarScale;
                 GlStateManager.pushMatrix();
                 GlStateManager.scale(scale, scale, 1);

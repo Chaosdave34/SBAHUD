@@ -12,6 +12,7 @@ import java.util.regex.Pattern;
 /**
  * Collection of text/string related utility methods
  */
+@SuppressWarnings("unused")
 public class TextUtils {
     /**
      * Hypixel uses US number format.
@@ -20,6 +21,7 @@ public class TextUtils {
     private static final Pattern STRIP_COLOR_PATTERN = Pattern.compile("(?i)§[0-9A-FK-ORZ]");
     private static final Pattern NUMBERS_SLASHES = Pattern.compile("[^0-9 /]");
     private static final Pattern MAGNITUDE_PATTERN = Pattern.compile("(\\d[\\d,.]*\\d*)+([kKmMbBtT])");
+    private static final Pattern TRIM_WHITESPACE_RESETS = Pattern.compile("^(?:\\s|§r)*|(?:\\s|§r)*$");
     private static final NavigableMap<Long, String> suffixes = new TreeMap<>();
 
     static {
@@ -54,7 +56,6 @@ public class TextUtils {
     /**
      * Converts all numbers with magnitudes in a given string, e.g. "10k" -> "10000" and "10M" -> "10000000." Magnitudes
      * are not case-sensitive.
-     *
      * <b>Supported magnitudes:</b>
      * <p>k - thousand</p>
      * <p>m - million</p>
@@ -164,5 +165,7 @@ public class TextUtils {
         return newFraction.toString();
     }
 
-
+    public static String trimWhitespaceAndResets(String input) {
+        return TRIM_WHITESPACE_RESETS.matcher(input).replaceAll("");
+    }
 }

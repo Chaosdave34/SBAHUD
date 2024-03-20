@@ -157,7 +157,7 @@ public class ComponentsGui extends WindowScreen {
 
     public State<String> magicFindTextState = new BasicState<>("");
 
-    public UIComponent magicFindText = new MoveableUIText("TRUE_DEFENCE_TEXT", "✯100")
+    public UIComponent magicFindText = new MoveableUIText("MAGIC_FIND_TEXT", "✯100")
             .bindText(magicFindTextState)
             .setColor(ColorCode.AQUA.getColorObject())
             .setX(new CenterConstraint())
@@ -166,7 +166,7 @@ public class ComponentsGui extends WindowScreen {
 
     public State<String> ferocityTextState = new BasicState<>("");
 
-    public UIComponent ferocityText = new MoveableUIText("TRUE_DEFENCE_TEXT", "⫽100")
+    public UIComponent ferocityText = new MoveableUIText("FEROCITY_TEXT", "⫽100")
             .bindText(ferocityTextState)
             .setColor(ColorCode.RED.getColorObject())
             .setX(new CenterConstraint())

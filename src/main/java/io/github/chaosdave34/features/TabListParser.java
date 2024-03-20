@@ -1,10 +1,11 @@
-package io.github.chaosdave34.utils;
+package io.github.chaosdave34.features;
 
 import com.google.common.collect.ComparisonChain;
 import com.google.common.collect.Ordering;
 import io.github.chaosdave34.SBHUD;
 import io.github.chaosdave34.core.ParsedTabColumn;
 import io.github.chaosdave34.core.ParsedTabSection;
+import io.github.chaosdave34.utils.TextUtils;
 import lombok.Getter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiPlayerTabOverlay;
@@ -22,8 +23,8 @@ import java.util.regex.Pattern;
 
 @Getter
 public class TabListParser {
-    private static final Pattern MAGIC_FIND_PATTERN_S = Pattern.compile("Magic Find: ✯(?<magic>[0-9,.]+)");
-    private static final Pattern FEROCITY_PATTERN_S = Pattern.compile("Ferocity: ⫽(?<magic>[0-9,.]+)");
+    private static final Pattern MAGIC_FIND_PATTERN = Pattern.compile("Magic Find: ✯(?<magic>[0-9,.]+)");
+    private static final Pattern FEROCITY_PATTERN = Pattern.compile("Ferocity: ⫽(?<magic>[0-9,.]+)");
 
     private static final SBHUD main = SBHUD.INSTANCE;
     private static final Logger logger = SBHUD.logger;
@@ -64,9 +65,9 @@ public class TabListParser {
 
                 if (stripped.contains("Magic")) SBHUD.logger.info(stripped);
 
-                if (stripped.matches(MAGIC_FIND_PATTERN_S.pattern())) {
+                if (stripped.matches(MAGIC_FIND_PATTERN.pattern())) {
                     parseMagicFind(stripped);
-                } else if (stripped.matches(FEROCITY_PATTERN_S.pattern())) {
+                } else if (stripped.matches(FEROCITY_PATTERN.pattern())) {
                     parseFerocity(stripped);
                 }
 
@@ -80,14 +81,14 @@ public class TabListParser {
     }
 
     private void parseMagicFind(String line) {
-        Matcher m = MAGIC_FIND_PATTERN_S.matcher(line);
+        Matcher m = MAGIC_FIND_PATTERN.matcher(line);
         if (m.matches()) {
             magicFind = TextUtils.parseInt(m.group("magic"));
         }
     }
 
     private void parseFerocity(String line) {
-        Matcher m = FEROCITY_PATTERN_S.matcher(line);
+        Matcher m = FEROCITY_PATTERN.matcher(line);
         if (m.matches()) {
             ferocity = TextUtils.parseInt(m.group("magic"));
         }

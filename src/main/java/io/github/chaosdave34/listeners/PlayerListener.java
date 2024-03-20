@@ -4,10 +4,11 @@ package io.github.chaosdave34.listeners;
 import com.google.gson.Gson;
 import io.github.chaosdave34.SBHUD;
 import io.github.chaosdave34.core.Attribute;
-import io.github.chaosdave34.utils.ActionBarParser;
+import io.github.chaosdave34.features.ActionBarParser;
+import io.github.chaosdave34.features.ScoreboardManager;
+import io.github.chaosdave34.features.SpamHider;
+import io.github.chaosdave34.features.TabListParser;
 import io.github.chaosdave34.utils.ItemUtils;
-import io.github.chaosdave34.utils.ScoreboardManager;
-import io.github.chaosdave34.utils.TabListParser;
 import lombok.Getter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -22,6 +23,7 @@ import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Timestamp;
 import java.time.format.DateTimeFormatter;
@@ -30,16 +32,17 @@ import java.util.regex.Pattern;
 
 //TODO Fix for Hypixel localization
 public class PlayerListener {
-
-
     private int timerTick = 1;
 
-
     private final SBHUD main = SBHUD.INSTANCE;
+    private final Logger logger = SBHUD.logger;
+
     @Getter
     private final ActionBarParser actionBarParser = new ActionBarParser();
     @Getter
     private final TabListParser tabListParser = new TabListParser();
+    @Getter
+    private final SpamHider spamHider = new SpamHider();
 
     /**
      * Reset all the timers and stuff when joining a new world.
@@ -62,6 +65,8 @@ public class PlayerListener {
             return;
         }
 
+        Minecraft mc = Minecraft.getMinecraft();
+
         String formattedText = e.message.getFormattedText();
         String unformattedText = e.message.getUnformattedText();
 
@@ -70,16 +75,22 @@ public class PlayerListener {
         }
 
         if (main.getUtils().isOnSkyblock()) {
-            // Type 2 means it's an action bar message.
-            if (e.type == 2) {
-                // Parse using ActionBarParser and display the rest message instead
-                actionBarParser.parseActionBar(unformattedText);
-
-            } else {
+            if (e.type == 1) {
                 if (main.getRenderListener().isPredictMana() && unformattedText.startsWith("Used ") && unformattedText.endsWith("Mana)")) {
                     int manaLost = Integer.parseInt(unformattedText.split(Pattern.quote("! ("))[1].split(Pattern.quote(" Mana)"))[0]);
                     changeMana(-manaLost);
                 }
+
+                // Spam hider
+                boolean spam = spamHider.filter(unformattedText);
+                if (spam) e.setCanceled(true);
+
+            }
+            // Type 2 means it's an action bar message.
+            else if (e.type == 2) {
+                // Parse using ActionBarParser and display the rest message instead
+                actionBarParser.parseActionBar(unformattedText);
+
             }
         }
     }

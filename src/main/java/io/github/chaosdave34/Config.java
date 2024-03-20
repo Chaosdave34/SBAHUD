@@ -44,12 +44,12 @@ public class Config extends Vigilant {
     public boolean effectiveHealthText = false;
 
     @Property(
-            type=PropertyType.CHECKBOX,
+            type = PropertyType.CHECKBOX,
             name = "Healing Wand Text",
             category = "Skyblock HUD",
             subcategory = "HUD Elements"
     )
-    public boolean healingWandText= false;
+    public boolean healingWandText = false;
 
     @Property(
             type = PropertyType.CHECKBOX,
@@ -192,7 +192,7 @@ public class Config extends Vigilant {
     public boolean changeBarColorForPotions = false;
 
     @Property(
-            type=PropertyType.DECIMAL_SLIDER,
+            type = PropertyType.DECIMAL_SLIDER,
             name = "X Scale",
             category = "Skyblock HUD",
             subcategory = "Bars",
@@ -203,7 +203,7 @@ public class Config extends Vigilant {
     public float barScaleX = 1;
 
     @Property(
-            type=PropertyType.DECIMAL_SLIDER,
+            type = PropertyType.DECIMAL_SLIDER,
             name = "Y Scale",
             category = "Skyblock HUD",
             subcategory = "Bars",
@@ -342,7 +342,7 @@ public class Config extends Vigilant {
 
     // Misc
     @Property(
-            type=PropertyType.CHECKBOX,
+            type = PropertyType.CHECKBOX,
             name = "Custom App Icon",
             description = "Requires a restart.",
             category = "Miscellaneous"
@@ -351,21 +351,21 @@ public class Config extends Vigilant {
 
     // Item Tooltips
     @Property(
-            type=PropertyType.CHECKBOX,
+            type = PropertyType.CHECKBOX,
             name = "Show Item ID",
             category = "Item Tooltips"
     )
     public boolean showItemID = false;
 
     @Property(
-            type=PropertyType.CHECKBOX,
+            type = PropertyType.CHECKBOX,
             name = "Show Item UUID",
             category = "Item Tooltips"
     )
     public boolean showItemUUID = false;
 
     @Property(
-            type=PropertyType.CHECKBOX,
+            type = PropertyType.CHECKBOX,
             name = "Show Item Timestamp",
             category = "Item Tooltips",
             subcategory = "Timestamp"
@@ -373,7 +373,7 @@ public class Config extends Vigilant {
     public boolean showItemTimestamp = false;
 
     @Property(
-            type=PropertyType.CHECKBOX,
+            type = PropertyType.CHECKBOX,
             name = "Nicely format Timestamp",
             category = "Item Tooltips",
             subcategory = "Timestamp"
@@ -381,7 +381,7 @@ public class Config extends Vigilant {
     public boolean nicelyFormatTimestamp = false;
 
     @Property(
-            type=PropertyType.CHECKBOX,
+            type = PropertyType.CHECKBOX,
             name = "Show Origin Tag",
             description = "kinda useless",
             category = "Item Tooltips"
@@ -389,14 +389,14 @@ public class Config extends Vigilant {
     public boolean showOriginTag = false;
 
     @Property(
-            type=PropertyType.CHECKBOX,
+            type = PropertyType.CHECKBOX,
             name = "Show Necromancer Souls",
             category = "Item Tooltips"
     )
     public boolean showNecromancerSouls = false;
 
     @Property(
-            type=PropertyType.CHECKBOX,
+            type = PropertyType.CHECKBOX,
             name = "Show Item Tier",
             description = "Shows the dungeon floor this item was obtained.",
             category = "Item Tooltips",
@@ -405,7 +405,7 @@ public class Config extends Vigilant {
     public boolean showItemTier = false;
 
     @Property(
-            type=PropertyType.CHECKBOX,
+            type = PropertyType.CHECKBOX,
             name = "Show Base Stat Boost Percentage",
             category = "Item Tooltips",
             subcategory = "Dungeon Items"
@@ -413,7 +413,7 @@ public class Config extends Vigilant {
     public boolean showBaseStatBoostPercentage = false;
 
     @Property(
-            type=PropertyType.CHECKBOX,
+            type = PropertyType.CHECKBOX,
             name = "Show Type",
             category = "Item Tooltips",
             subcategory = "Pets"
@@ -421,7 +421,7 @@ public class Config extends Vigilant {
     public boolean showPetType = false;
 
     @Property(
-            type=PropertyType.CHECKBOX,
+            type = PropertyType.CHECKBOX,
             name = "Show Candys Used",
             category = "Item Tooltips",
             subcategory = "Pets"
@@ -430,7 +430,7 @@ public class Config extends Vigilant {
 
     // bug fixes
     @Property(
-            type=PropertyType.CHECKBOX,
+            type = PropertyType.CHECKBOX,
             name = "Fix Empty Sounds",
             description = "Has no impact on gameplay,",
             category = "Bug Fixes"
@@ -438,7 +438,7 @@ public class Config extends Vigilant {
     public boolean fixEmptySounds = false;
 
     @Property(
-            type=PropertyType.CHECKBOX,
+            type = PropertyType.CHECKBOX,
             name = "Fix Empty Score Player Teams and Objectives",
             description = "Has no impact on gameplay,",
             category = "Bug Fixes"
@@ -446,11 +446,67 @@ public class Config extends Vigilant {
     public boolean fixEmptyScorePlayerTeamsAndObjectives = false;
 
     @Property(
-            type=PropertyType.CHECKBOX,
+            type = PropertyType.CHECKBOX,
             name = "Fix Opening Links on Linux",
             category = "Bug Fixes"
     )
     public boolean fixOpeningLinksOnLinux = false;
+
+    // Spam hider
+    @Property(
+            type = PropertyType.CHECKBOX,
+            name = "Dungeon Buff",
+            description = "DUNGEON BUFF! {}; Granted you {}; Also granted you {}",
+            category = "Spam Hider",
+            subcategory = "Dungeons"
+    )
+    public boolean hideDungeonBuffMessages = false;
+
+    @Property(
+            type = PropertyType.CHECKBOX,
+            name = "Dungeon Blessings",
+            description = "A Blessing {} was picked up!; {} has obtained Blessing {}",
+            category = "Spam Hider",
+            subcategory = "Dungeons"
+    )
+    public boolean hideDungeonBlessingsMessages = false;
+
+    @Property(
+            type = PropertyType.CHECKBOX,
+            name = "Essence",
+            description = "ESSENCE! {}; {} found a {} Essence! Everyone gains an extra essence!",
+            category = "Spam Hider",
+            subcategory = "Dungeons"
+    )
+    public boolean hideDungeonEssenceMessages = false;
+
+    @Property(
+            type = PropertyType.CHECKBOX,
+            name = "Boss Dialogue",
+            description = "[Boss] {}",
+            category = "Spam Hider",
+            subcategory = "Dungeons"
+    )
+    public boolean hideDungeonBossDialogueMessages = false;
+
+    @Property(
+            type = PropertyType.CHECKBOX,
+            name = "Milestones",
+            description = "{} Milestone {}",
+            category = "Spam Hider",
+            subcategory = "Dungeons"
+    )
+    public boolean hideDungeonMilestoneMessages = false;
+
+    @Property(
+            type = PropertyType.CHECKBOX,
+            name = "Mort Dialogue",
+            description = "[Npc] Mort: {}",
+            category = "Spam Hider",
+            subcategory = "Dungeons"
+    )
+    public boolean hideDungeonMortDialogueMessages = false;
+
 
     public static Config INSTANCE = new Config();
 

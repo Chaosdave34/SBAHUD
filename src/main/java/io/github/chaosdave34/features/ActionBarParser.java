@@ -1,11 +1,12 @@
-package io.github.chaosdave34.utils;
+package io.github.chaosdave34.features;
 
 import io.github.chaosdave34.SBHUD;
 import io.github.chaosdave34.core.ArmorAbilityStack;
 import io.github.chaosdave34.core.Attribute;
+import io.github.chaosdave34.utils.TextUtils;
+import io.github.chaosdave34.utils.Utils;
 import lombok.Getter;
 import lombok.Setter;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.Logger;
 
 import java.text.ParseException;
@@ -50,11 +51,11 @@ import java.util.regex.Pattern;
 
 @Getter
 public class ActionBarParser {
-    private static final Pattern MANA_PATTERN_S = Pattern.compile("(?<num>[0-9,.]+)/(?<den>[0-9,.]+)✎(| Mana| (?<overflow>-?[0-9,.]+)ʬ)");
-    private static final Pattern DEFENSE_PATTERN_S = Pattern.compile("(?<defense>[0-9,.]+)❈ Defense");
-    private static final Pattern TRUE_DEFENSE_PATTERN_S = Pattern.compile("(?<trueDefense>[0-9,.]+)❂ True Defense");
-    private static final Pattern HEALTH_PATTERN_S = Pattern.compile("(?<health>[0-9,.]+)/(?<maxHealth>[0-9,.]+)❤(?<wand>\\+(?<wandHeal>[0-9,.]+)[▆▅▄▃▂▁])?");
-    private static final Pattern SALVATION_PATTERN_S = Pattern.compile("(§6|§a§l) {2}(T[1-3]+!?)");
+    private static final Pattern MANA_PATTERN = Pattern.compile("(?<num>[0-9,.]+)/(?<den>[0-9,.]+)✎(| Mana| (?<overflow>-?[0-9,.]+)ʬ)");
+    private static final Pattern DEFENSE_PATTERN = Pattern.compile("(?<defense>[0-9,.]+)❈ Defense");
+    private static final Pattern TRUE_DEFENSE_PATTERN = Pattern.compile("(?<trueDefense>[0-9,.]+)❂ True Defense");
+    private static final Pattern HEALTH_PATTERN = Pattern.compile("(?<health>[0-9,.]+)/(?<maxHealth>[0-9,.]+)❤(?<wand>\\+(?<wandHeal>[0-9,.]+)[▆▅▄▃▂▁])?");
+    private static final Pattern SALVATION_PATTERN = Pattern.compile("(§6|§a§l) {2}(T[1-3]+!?)");
 
     private static final SBHUD main = SBHUD.INSTANCE;
     private static final Logger logger = SBHUD.logger;
@@ -191,7 +192,7 @@ public class ActionBarParser {
                 return parseMana(section);
             } else if (section.contains("Ⓞ") || section.contains("ⓩ")) {
                 return parseTickers(section);
-            } else if (section.matches(SALVATION_PATTERN_S.pattern())) {
+            } else if (section.matches(SALVATION_PATTERN.pattern())) {
                 return parseSalvation(section);
             } else if (section.contains("|||")) {
                 return parseAligned(section);
@@ -207,7 +208,7 @@ public class ActionBarParser {
 
     private String parseTrueDefence(String trueDefenceSection) {
         String stripped = TextUtils.stripColor(trueDefenceSection);
-        Matcher m = TRUE_DEFENSE_PATTERN_S.matcher(stripped);
+        Matcher m = TRUE_DEFENSE_PATTERN.matcher(stripped);
         if (m.matches()) {
             trueDefence = TextUtils.parseFloat(m.group("trueDefense"));
             if (SBHUD.config.trueDefenceText || SBHUD.config.hideTrueDefense) {
@@ -277,7 +278,7 @@ public class ActionBarParser {
         float newHealth;
         float maxHealth;
         String stripped = TextUtils.stripColor(healthSection);
-        Matcher m = HEALTH_PATTERN_S.matcher(stripped);
+        Matcher m = HEALTH_PATTERN.matcher(stripped);
         if (separateDisplay && m.matches()) {
             newHealth = TextUtils.parseFloat(m.group("health"));
             maxHealth = TextUtils.parseFloat(m.group("maxHealth"));
@@ -315,7 +316,7 @@ public class ActionBarParser {
         // 183/171✎ Mana
         // 421/421✎ 10ʬ
         // 421/421✎ -10ʬ
-        Matcher m = MANA_PATTERN_S.matcher(TextUtils.stripColor(manaSection).trim());
+        Matcher m = MANA_PATTERN.matcher(TextUtils.stripColor(manaSection).trim());
         if (m.matches()) {
             setAttribute(Attribute.MANA, TextUtils.parseFloat(m.group("num")));
             setAttribute(Attribute.MAX_MANA, TextUtils.parseFloat(m.group("den")));
@@ -344,7 +345,7 @@ public class ActionBarParser {
         // Tethered T3! (Dungeon Healer)--not sure why exclamation mark: §a1039§a? Defense§a§l  T3!
         // Tethered T3! (Dungeon Healer) + Aligned ||| (Gyrokinetic Wand): §a1039§a? Defense§a |||§a§l  T3!
         String stripped = TextUtils.stripColor(defenseSection);
-        Matcher m = DEFENSE_PATTERN_S.matcher(stripped);
+        Matcher m = DEFENSE_PATTERN.matcher(stripped);
         if (m.matches()) {
             float defense = TextUtils.parseFloat(m.group("defense"));
             setAttribute(Attribute.DEFENCE, defense);

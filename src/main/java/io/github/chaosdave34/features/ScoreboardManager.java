@@ -1,7 +1,8 @@
-package io.github.chaosdave34.utils;
+package io.github.chaosdave34.features;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import io.github.chaosdave34.utils.TextUtils;
 import lombok.Getter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.scoreboard.Score;

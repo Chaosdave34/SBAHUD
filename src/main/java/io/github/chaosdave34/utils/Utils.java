@@ -5,6 +5,7 @@ import io.github.chaosdave34.SBHUD;
 import io.github.chaosdave34.core.Attribute;
 import io.github.chaosdave34.events.SkyblockJoinedEvent;
 import io.github.chaosdave34.events.SkyblockLeftEvent;
+import io.github.chaosdave34.features.ScoreboardManager;
 import lombok.Getter;
 import lombok.Setter;
 import net.minecraft.client.Minecraft;

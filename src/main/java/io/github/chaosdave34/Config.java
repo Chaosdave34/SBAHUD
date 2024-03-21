@@ -507,6 +507,15 @@ public class Config extends Vigilant {
     )
     public boolean hideDungeonMortDialogueMessages = false;
 
+    // Dungeons
+    @Property(
+            type=PropertyType.CHECKBOX,
+            name = "Fire Freeze Staff Timer",
+            description = "For F3 and M3 boss phase.",
+            category = "Dungeons"
+    )
+    public boolean fireFreezeTimer = false;
+
 
     public static Config INSTANCE = new Config();
 

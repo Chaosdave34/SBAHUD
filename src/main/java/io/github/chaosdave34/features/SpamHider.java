@@ -17,7 +17,7 @@ public class SpamHider {
     private final static Pattern DUNGEON_ESSENCE_PATTERN_1 = Pattern.compile("ESSENCE!(.+)?");
     private final static Pattern DUNGEON_ESSENCE_PATTERN_2 = Pattern.compile("(.+)?found a(.+)?Essence! Everyone gains an extra essence!");
 
-    private final static Pattern DUNGEON_BOSS_DIALOGUE_PATTERN = Pattern.compile("\\[Boss](.+)?");
+    private final static Pattern DUNGEON_BOSS_DIALOGUE_PATTERN = Pattern.compile("\\[BOSS](.+)?");
 
     private final static Pattern DUNGEON_MILESTONE_PATTERN = Pattern.compile("(.+)?Milestone(.+)?");
 

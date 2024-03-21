@@ -2,6 +2,7 @@ package io.github.chaosdave34.listeners;
 
 
 import com.google.gson.Gson;
+import gg.essential.api.utils.GuiUtil;
 import io.github.chaosdave34.SBHUD;
 import io.github.chaosdave34.core.Attribute;
 import io.github.chaosdave34.features.ActionBarParser;
@@ -9,6 +10,7 @@ import io.github.chaosdave34.features.ScoreboardManager;
 import io.github.chaosdave34.features.SpamHider;
 import io.github.chaosdave34.features.TabListParser;
 import io.github.chaosdave34.utils.ItemUtils;
+import io.github.chaosdave34.utils.TextUtils;
 import lombok.Getter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -24,6 +26,7 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import org.apache.logging.log4j.Logger;
+import scala.tools.nsc.doc.base.comment.Title;
 
 import java.sql.Timestamp;
 import java.time.format.DateTimeFormatter;
@@ -69,13 +72,14 @@ public class PlayerListener {
 
         String formattedText = e.message.getFormattedText();
         String unformattedText = e.message.getUnformattedText();
+        unformattedText = TextUtils.stripColor(unformattedText);
 
         if (formattedText.startsWith("§7Sending to server ")) {
             return;
         }
 
         if (main.getUtils().isOnSkyblock()) {
-            if (e.type == 1) {
+            if (e.type == 0) {
                 if (main.getRenderListener().isPredictMana() && unformattedText.startsWith("Used ") && unformattedText.endsWith("Mana)")) {
                     int manaLost = Integer.parseInt(unformattedText.split(Pattern.quote("! ("))[1].split(Pattern.quote(" Mana)"))[0]);
                     changeMana(-manaLost);
@@ -83,8 +87,27 @@ public class PlayerListener {
 
                 // Spam hider
                 boolean spam = spamHider.filter(unformattedText);
-                if (spam) e.setCanceled(true);
+                if (spam) e.message = null;
 
+                // Fire freeze staff timer
+                if (SBHUD.config.fireFreezeTimer && unformattedText.matches("\\[BOSS] The Professor: Oh\\? You found my Guardians' one weakness\\?") || unformattedText.contains("test123")) {
+                    mc.ingameGUI.setDefaultTitlesTimes();
+                    new Thread(() -> {
+                        try {
+                            Thread.sleep(1000);
+
+                            mc.ingameGUI.displayTitle("§cGet Ready", "§eIn 4 sec!", 0, 60, 0);
+                            mc.thePlayer.playSound("random.burp", 2, 1);
+
+                            Thread.sleep(4000);
+
+                            mc.ingameGUI.displayTitle("§4NOW", "", 0, 60, 0);
+                            mc.thePlayer.playSound("random.anvil_land", 2, 1);
+                        } catch (InterruptedException ex) {
+                            logger.error(ex.getMessage());
+                        }
+                    }).start();
+                }
             }
             // Type 2 means it's an action bar message.
             else if (e.type == 2) {

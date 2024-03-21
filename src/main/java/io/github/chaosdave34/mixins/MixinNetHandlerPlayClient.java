@@ -10,14 +10,19 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 
-@SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
 @Mixin(NetHandlerPlayClient.class)
-public class MixinScoreboard {
+public class MixinNetHandlerPlayClient {
     @Redirect(method = "handleTeams", at = @At(value = "INVOKE", target = "Lnet/minecraft/scoreboard/Scoreboard;removeTeam(Lnet/minecraft/scoreboard/ScorePlayerTeam;)V"))
     public void fixNullPointerBecauseTeamIsNull(Scoreboard instance, ScorePlayerTeam scorePlayerTeam) {
         if (!(SBHUD.config.fixEmptyScorePlayerTeamsAndObjectives && scorePlayerTeam == null))
             instance.removeTeam(scorePlayerTeam);
+    }
 
+    @Redirect(method = "handleTeams", at = @At(value = "INVOKE", target = "Lnet/minecraft/scoreboard/Scoreboard;createTeam(Ljava/lang/String;)Lnet/minecraft/scoreboard/ScorePlayerTeam;"))
+    public ScorePlayerTeam fixAddingExistingScoreboardTeam(Scoreboard instance, String name) {
+        if (SBHUD.config.fixAddingExistingScoreboardTeams && instance.getTeam(name) != null) return instance.getTeam(name);
+
+        return instance.createTeam(name);
     }
 
     @Redirect(method = "handleScoreboardObjective", at = @At(value = "INVOKE", target = "Lnet/minecraft/scoreboard/Scoreboard;removeObjective(Lnet/minecraft/scoreboard/ScoreObjective;)V"))

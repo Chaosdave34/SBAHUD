@@ -447,6 +447,14 @@ public class Config extends Vigilant {
 
     @Property(
             type = PropertyType.CHECKBOX,
+            name = "Fix Adding existing Scoreboard Teams",
+            description = "Has no impact on gameplay,",
+            category = "Bug Fixes"
+    )
+    public boolean fixAddingExistingScoreboardTeams = false;
+
+    @Property(
+            type = PropertyType.CHECKBOX,
             name = "Fix Opening Links on Linux",
             category = "Bug Fixes"
     )

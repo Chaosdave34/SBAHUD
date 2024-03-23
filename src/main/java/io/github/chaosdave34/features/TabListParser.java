@@ -63,8 +63,6 @@ public class TabListParser {
                 }
                 String stripped = TextUtils.stripColor(line).trim();
 
-                if (stripped.contains("Magic")) SBHUD.logger.info(stripped);
-
                 if (stripped.matches(MAGIC_FIND_PATTERN.pattern())) {
                     parseMagicFind(stripped);
                 } else if (stripped.matches(FEROCITY_PATTERN.pattern())) {

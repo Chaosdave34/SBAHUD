@@ -9,7 +9,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.apache.logging.log4j.Logger;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -55,7 +54,7 @@ public class ActionBarParser {
     private static final Pattern DEFENSE_PATTERN = Pattern.compile("(?<defense>[0-9,.]+)❈ Defense");
     private static final Pattern TRUE_DEFENSE_PATTERN = Pattern.compile("(?<trueDefense>[0-9,.]+)❂ True Defense");
     private static final Pattern HEALTH_PATTERN = Pattern.compile("(?<health>[0-9,.]+)/(?<maxHealth>[0-9,.]+)❤(?<wand>\\+(?<wandHeal>[0-9,.]+)[▆▅▄▃▂▁])?");
-    private static final Pattern SALVATION_PATTERN = Pattern.compile("(§6|§a§l) {2}(T[1-3]+!?)");
+    private static final Pattern SALVATION_PATTERN = Pattern.compile(" {2}(T[1-3]+!?)");
 
     private static final SBHUD main = SBHUD.INSTANCE;
     private static final Logger logger = SBHUD.logger;
@@ -142,7 +141,14 @@ public class ActionBarParser {
             try {
                 if (parseSection(section) == null) {
                     // Remove via callback
-                    stringsToRemove.add(section);
+                    if (section.contains("❈")) {
+                        int indexOfDefenseSymbol = section.indexOf("❈");
+                        String fixedDefenseText = section.substring(indexOfDefenseSymbol);
+                        fixedDefenseText = section.substring(0, indexOfDefenseSymbol) + "§a" + fixedDefenseText;
+
+                        stringsToRemove.add(fixedDefenseText);
+                    } else
+                        stringsToRemove.add(section);
                 }
             } catch (Exception ignored) {
             }
@@ -156,51 +162,33 @@ public class ActionBarParser {
      * @return Text to keep displaying or null
      */
     private String parseSection(String section) {
-        String stripColoring = TextUtils.stripColor(section);
-        String convertMag;
+        if (section.contains("❤")) {
+            // cutting the crimson stack information out
+            section = parseArmorAbilityStack(section);
 
-        try {
-            convertMag = TextUtils.convertMagnitudes(stripColoring);
-
-            // Format for overflow mana is a bit different. Splitstats must parse out overflow first before getting numbers
-            if (section.contains("ʬ")) {
-                convertMag = convertMag.split(" ")[0];
-            }
-            String numbersOnly = TextUtils.getNumbersOnly(convertMag).trim(); // keeps numbers and slashes
-            String[] splitStats = numbersOnly.split("/");
-
-            if (section.contains("❤")) {
-                // cutting the crimson stack information out
-                section = parseArmorAbilityStack(section);
-
-                // Fixing health when glare damage (from magma boss in crimson isle) is displayed.
-                // Glare damage stays in the action bar normally
-                if (section.endsWith("ಠ")) {
-                    if (section.contains("Glare Damage")) {
-                        section = section.split(Pattern.quote("§6 "))[0];
-                    }
+            // Fixing health when glare damage (from magma boss in crimson isle) is displayed.
+            // Glare damage stays in the action bar normally
+            if (section.endsWith("ಠ")) {
+                if (section.contains("Glare Damage")) {
+                    section = section.split(Pattern.quote("§6 "))[0];
                 }
-
-                // ❤ indicates a health section
-                return parseHealth(section);
-            } else if (section.contains("❈")) {
-                // ❈ indicates a defense section
-                return parseDefense(section);
-            } else if (section.endsWith("§f❂ True Defense")) {
-                return parseTrueDefence(section);
-            } else if (section.contains("✎")) {
-                return parseMana(section);
-            } else if (section.contains("Ⓞ") || section.contains("ⓩ")) {
-                return parseTickers(section);
-            } else if (section.matches(SALVATION_PATTERN.pattern())) {
-                return parseSalvation(section);
-            } else if (section.contains("|||")) {
-                return parseAligned(section);
             }
-        } catch (ParseException e) {
-            logger.error("The section \"" + section + "\" will be skipped due to an error during number parsing.");
-            logger.error("Failed to parse number at offset " + e.getErrorOffset() + " in string \"" + e.getMessage() + "\".", e);
-            return section;
+
+            // ❤ indicates a health section
+            return parseHealth(section);
+        } else if (section.contains("❈")) {
+            // ❈ indicates a defense section
+            return parseDefense(section);
+        } else if (section.endsWith("§f❂ True Defense")) {
+            return parseTrueDefence(section);
+        } else if (section.contains("✎")) {
+            return parseMana(section);
+        } else if (section.contains("Ⓞ") || section.contains("ⓩ")) {
+            return parseTickers(section);
+        } else if (section.matches(SALVATION_PATTERN.pattern())) {
+            return parseSalvation(section);
+        } else if (section.contains("|||")) {
+            return parseAligned(section);
         }
 
         return section;
@@ -341,9 +329,6 @@ public class ActionBarParser {
      */
     private String parseDefense(String defenseSection) {
         // §a720§a❈ Defense
-        // Tethered T1 (Dungeon Healer)--means tethered to 1 person I think: §a1024§a? Defense§6  T1
-        // Tethered T3! (Dungeon Healer)--not sure why exclamation mark: §a1039§a? Defense§a§l  T3!
-        // Tethered T3! (Dungeon Healer) + Aligned ||| (Gyrokinetic Wand): §a1039§a? Defense§a |||§a§l  T3!
         String stripped = TextUtils.stripColor(defenseSection);
         Matcher m = DEFENSE_PATTERN.matcher(stripped);
         if (m.matches()) {
@@ -380,7 +365,11 @@ public class ActionBarParser {
     }
 
     private String parseSalvation(String salvationSection) {
-        salvationText = salvationSection.trim();
+        if (salvationSection.contains("!"))
+            salvationText = "§a§l" + salvationSection.trim();
+        else
+            salvationText = "§6" + salvationSection.trim();
+
         if (SBHUD.config.salvationText) {
             return null;
         } else {

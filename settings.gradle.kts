@@ -11,5 +11,5 @@ pluginManagement {
     }
 }
 
-rootProject.name = "SBHUD"
+rootProject.name = "sbhud"
 

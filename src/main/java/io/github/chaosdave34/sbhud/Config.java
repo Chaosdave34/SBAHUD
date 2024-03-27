@@ -9,6 +9,7 @@ import java.io.File;
 
 public class Config extends Vigilant {
     // Skyblock HUD
+    @SuppressWarnings("unused")
     @Property(
             type = PropertyType.BUTTON,
             name = "Edit HUD Location",
@@ -514,6 +515,15 @@ public class Config extends Vigilant {
             subcategory = "Dungeons"
     )
     public boolean hideDungeonMortDialogueMessages = false;
+
+    @Property(
+            type = PropertyType.CHECKBOX,
+            name = "Orb Pickup",
+            description = "◕ {} picked up your {} Orb!; ◕ You picked up a {} Orb from {}.",
+            category = "Spam Hider",
+            subcategory = "Dungeons"
+    )
+    public boolean hideDungeonOrbPickupMessages = false;
 
     // Dungeons
     @Property(

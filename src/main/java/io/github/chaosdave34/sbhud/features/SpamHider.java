@@ -23,8 +23,10 @@ public class SpamHider {
 
     private final static Pattern DUNGEON_MORT_DIALOGUE_PATTERN = Pattern.compile("\\[NPC] Mort:(.+)?");
 
-    private static final Config config = SBHUD.config;
+    private final static Pattern DUNGEON_ORB_PICKUP_1 = Pattern.compile("◕(.+)?picked up your(.+)?Orb!");
+    private final static Pattern DUNGEON_ORB_PICKUP_2 = Pattern.compile("◕ You picked up a(.+)?Orb from(.+)?\\.");
 
+    private static final Config config = SBHUD.config;
 
     public boolean filter(String message) {
         message = TextUtils.trimWhitespaceAndResets(message);
@@ -41,8 +43,9 @@ public class SpamHider {
             return true;
         } else if (config.hideDungeonMortDialogueMessages && message.matches(DUNGEON_MORT_DIALOGUE_PATTERN.pattern())) {
             return true;
+        } else if (config.hideDungeonOrbPickupMessages && (message.matches(DUNGEON_ORB_PICKUP_1.pattern()) || message.matches(DUNGEON_ORB_PICKUP_2.pattern()))) {
+            return true;
         }
-
         return false;
     }
 }

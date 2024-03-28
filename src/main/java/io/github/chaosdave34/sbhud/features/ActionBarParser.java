@@ -141,14 +141,8 @@ public class ActionBarParser {
             try {
                 if (parseSection(section) == null) {
                     // Remove via callback
-                    if (section.contains("❈")) {
-                        int indexOfDefenseSymbol = section.indexOf("❈");
-                        String fixedDefenseText = section.substring(indexOfDefenseSymbol);
-                        fixedDefenseText = section.substring(0, indexOfDefenseSymbol) + "§a" + fixedDefenseText;
-
-                        stringsToRemove.add(fixedDefenseText);
-                    } else
-                        stringsToRemove.add(section);
+                    // Remove via callback
+                    stringsToRemove.add(section);
                 }
             } catch (Exception ignored) {
             }
@@ -225,10 +219,10 @@ public class ActionBarParser {
                 String stackSymbol = amorAbilityStack.getSymbol();
 
                 if (section.endsWith(stackSymbol)) {
-
                     String[] split = section.split("§6");
                     String stack = split[split.length - 1];
                     String remove = "§6" + stack;
+
                     if (stack.contains("§l")) {
                         stack = stack.substring(2);
                         if (SBHUD.config.armorAbilityStack) {
@@ -318,7 +312,7 @@ public class ActionBarParser {
                 return null;
             }
         }
-        return manaSection;
+        return manaSection.replace("§r", ""); // Hacky fix for new formatting
     }
 
     /**

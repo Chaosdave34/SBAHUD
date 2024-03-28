@@ -109,7 +109,7 @@ public class PlayerListener {
             // Type 2 means it's an action bar message.
             else if (e.type == 2) {
                 // Parse using ActionBarParser and display the rest message instead
-                actionBarParser.parseActionBar(unformattedText);
+                actionBarParser.parseActionBar(formattedText);
 
             }
         }
@@ -122,9 +122,10 @@ public class PlayerListener {
     public void onChatReceiveLast(ClientChatReceivedEvent e) {
         if (e.type == 2 && !e.isCanceled()) {
             Iterator<String> itr = actionBarParser.getStringsToRemove().iterator();
-            String message = e.message.getUnformattedText();
+            String message = e.message.getFormattedText();
             while (itr.hasNext()) {
                 String next = itr.next();
+                SBHUD.logger.info(message + " --- " + next);
                 message = message.replaceAll(" *" + Pattern.quote(next), "");
             }
             message = message.trim();

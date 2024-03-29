@@ -125,7 +125,6 @@ public class PlayerListener {
             String message = e.message.getFormattedText();
             while (itr.hasNext()) {
                 String next = itr.next();
-                SBHUD.logger.info(message + " --- " + next);
                 message = message.replaceAll(" *" + Pattern.quote(next), "");
             }
             message = message.trim();

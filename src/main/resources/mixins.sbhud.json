@@ -1,11 +1,10 @@
 {
-  "package": "io.github.chaosdave34.mixins",
+  "package": "io.github.chaosdave34.sbhud.mixins",
   "refmap": "mixins.${modid}.refmap.json",
   "minVersion": "0.7",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "MixinNetHandlerPlayClient",
-    "MixinScoreboard",
     "skytils.MixinSkytilsChatTabs"
   ],
   "client": [

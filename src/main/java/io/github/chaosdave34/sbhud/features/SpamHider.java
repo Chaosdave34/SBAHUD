@@ -26,6 +26,8 @@ public class SpamHider {
     private final static Pattern DUNGEON_ORB_PICKUP_1 = Pattern.compile("◕(.+)?picked up your(.+)?Orb!");
     private final static Pattern DUNGEON_ORB_PICKUP_2 = Pattern.compile("◕ You picked up a(.+)?Orb from(.+)?\\.");
 
+    private final static Pattern DUNGEON_BLOOD_KEY_TUTORIAL = Pattern.compile("RIGHT CLICK on the BLOOD DOOR to open it. This key can only be used to open 1 door!");
+
     private static final Config config = SBHUD.config;
 
     public boolean filter(String message) {
@@ -44,6 +46,8 @@ public class SpamHider {
         } else if (config.hideDungeonMortDialogueMessages && message.matches(DUNGEON_MORT_DIALOGUE_PATTERN.pattern())) {
             return true;
         } else if (config.hideDungeonOrbPickupMessages && (message.matches(DUNGEON_ORB_PICKUP_1.pattern()) || message.matches(DUNGEON_ORB_PICKUP_2.pattern()))) {
+            return true;
+        } else if (config.hideDungeonBloodKeyTutorialMessages && (message.matches(DUNGEON_BLOOD_KEY_TUTORIAL.pattern()))) {
             return true;
         }
         return false;

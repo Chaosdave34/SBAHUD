@@ -525,6 +525,15 @@ public class Config extends Vigilant {
     )
     public boolean hideDungeonOrbPickupMessages = false;
 
+    @Property(
+            type = PropertyType.CHECKBOX,
+            name = "Blood Key Tutorial",
+            description = "RIGHT CLICK on the BLOOD DOOR to open it. This key can only be used to open 1 door!",
+            category = "Spam Hider",
+            subcategory = "Dungeons"
+    )
+    public boolean hideDungeonBloodKeyTutorialMessages = false;
+
     // Dungeons
     @Property(
             type=PropertyType.CHECKBOX,
